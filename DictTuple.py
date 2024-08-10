@@ -17,7 +17,8 @@ class DictTuple:
             for key in dictionary:
                 len_set.add(key)
 
-        return f"{len(len_set)}"
+        print(type(len(len_set)))
+        return len(len_set)
 
     def __bool__(self):
         if len(self.dt) > 1:
@@ -105,7 +106,7 @@ d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordi
 
 print("d :", d4)
 #print("eq: ", d.__eq__(d1))
-#print("d.__len__():", d.__len__())
+print("d.__len__():", d.__len__())
 #print("d.__bool__():", d.__bool__())
 # print("repr(d):, ", repr(d))
 #print("contains: ", d4.__contains__('c2'))
