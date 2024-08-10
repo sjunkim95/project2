@@ -37,10 +37,8 @@ class DictTuple:
     def __contains__(self, args):
         key_list = []
         for dictionaries in self.dt:
-            print('dictionaries', dictionaries)
             for i in dictionaries.keys():
                 key_list.append(i)
-        print(key_list)
         if args not in key_list:
             return False
         else:
@@ -59,10 +57,17 @@ class DictTuple:
         
         if type(k) == str:
             for dictionaries in self.dt:
-                for value in dictionaries.values():
-                        return value
+                for key, value in dictionaries.items():
+                    print("밸류는", key, value)
+                    if key == k:
+                        return_list = []
+                        for i in value:
+                            return_list.append(i)
+                        return tuple(return_list)
+
         else:
             raise TypeError("the key is not in string")
+        print("출력", self.dt)
 
     def __delitem__(self, k):
         if type(self.dt) == tuple:
@@ -103,8 +108,9 @@ print("d :", d4)
 #print("d.__len__():", d.__len__())
 #print("d.__bool__():", d.__bool__())
 # print("repr(d):, ", repr(d))
-print("contains: ", d4.__contains__('c2'))
-#print("getitems: ", d.__getitem__('c1'))
+#print("contains: ", d4.__contains__('c2'))
+print("getitems: ", d4.__getitem__('c1'))
+print("getitems 이후: ", d4)
 #print("여기는" , d['c1'])
 #print("delitems :", d.__delitem__('c1'), "그 후 d:", d)
 #print("delitems전 : ", d4)
