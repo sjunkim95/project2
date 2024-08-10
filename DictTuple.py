@@ -35,12 +35,16 @@ class DictTuple:
         return self.dt == other.dt
 
     def __contains__(self, args):
-        for dictionary in self.dt:
-            for key in dictionary:
-                if args == key:
-                    return True
-                else:
-                    return False
+        key_list = []
+        for dictionaries in self.dt:
+            print('dictionaries', dictionaries)
+            for i in dictionaries.keys():
+                key_list.append(i)
+        print(key_list)
+        if args not in key_list:
+            return False
+        else:
+            return True
 
     def __getitem__(self, k):
         if type(self.dt) is tuple:
@@ -86,21 +90,20 @@ class DictTuple:
 
 
 
-'''
+
 coordinate = mynamedtuple('coordinate', 'x y')
 d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
-'''
-coordinate = mynamedtuple('coordinate', 'x y')
-d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-print("d :", d)
+
+
+print("d :", d4)
 #print("eq: ", d.__eq__(d1))
 #print("d.__len__():", d.__len__())
 #print("d.__bool__():", d.__bool__())
 # print("repr(d):, ", repr(d))
-# print("contains: ", d.__contains__('c2'))
+print("contains: ", d4.__contains__('c2'))
 #print("getitems: ", d.__getitem__('c1'))
 #print("여기는" , d['c1'])
 #print("delitems :", d.__delitem__('c1'), "그 후 d:", d)
