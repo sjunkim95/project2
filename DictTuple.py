@@ -96,10 +96,10 @@ class DictTuple:
 
     def __add__(self, right):
         print("add")
-        if type(right) is dict:
-            self.dt.append(right)
-            return tuple(self.dt)
-        elif type(right) is DictTuple:
+      #  if type(right) is dict:
+       #     self.dt.append(right)
+        #    return tuple(self.dt)
+        if type(right) is DictTuple:
             return tuple(self.dt + right.dt)
         else:
             return TypeError("The key is not DictTuple or Dict")
@@ -148,17 +148,17 @@ d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordi
 
 # __add__
 # 1.
-print("d1+d2 는: ", d2+d1)
+#print("d1+d2 는: ", d2+d1)
 
 # 2.
-adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-adict = {'c3': coordinate(3, 4)}
-print("adict + adt: ", adt + adict)
+#adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
+#adict = {'c3': coordinate(3, 4)}
+#print("adict + adt: ", adt + adict)
 
 # 3.
-adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-adict = {'c3': coordinate(3, 4)}
-print("adt + adict는 : ", adict + adt)
+#adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
+#adict = {'c3': coordinate(3, 4)}
+#print("adt + adict는 : ", adict + adt)
 
 
 
