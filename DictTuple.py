@@ -41,13 +41,13 @@ class DictTuple:
                     for right_dict in other.dt:
                         for right_key, right_value in right_dict.items():
                             if left_key == right_key:
-                                if left_value == right_value:
+                                print(left_dict[left_key], right_dict[right_key])
+                                if left_dict[left_key] == right_dict[right_key]:
                                     return True
                                 else:
                                     return False
                             else:
                                 return False
-
 
     def __contains__(self, args):
         key_list = []
