@@ -4,30 +4,52 @@ import keyword
 def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
 
     if type(field_names) == list:
+        copy_field_names = []
+        for i in field_names:
+            i = i.strip()
+            copy_field_names.append(i)
+        field_names = copy_field_names
         field_names = sorted(list(set(field_names)))
+
     if type(field_names) == str:
         if ',' in field_names:
             field_names = field_names.split(',')
+            copy_field_names = []
+            for i in field_names:
+                i = i.strip()
+                copy_field_names.append(i)
+            field_names = copy_field_names
+
         else:
             field_names = field_names.split(' ')
-
-    for i in range(len(field_names)):
-        if field_names[i] not in defaults.keys():
-            defaults[field_names[i]] = 0
-
-    print("타입네임", type_name, "필드네임", field_names, "defaults는:", defaults)
-    if not type_name.isidentifier():
-        raise SyntaxError(f"Invalid type name: {type_name}")
-    if keyword.iskeyword(type_name):
-        raise SyntaxError(f"Invalid keyword name: {type_name}")
-
-    for i in field_names:
-        if i not in defaults:
-            raise SyntaxError(f"Invalid default value: {i}")
+            copy_field_names = []
+            for i in field_names:
+                i = i.strip()
+                copy_field_names.append(i)
+            field_names = copy_field_names
 
     for i in defaults.keys():
         if i not in field_names:
             raise SyntaxError(f"Invalid field name value: {i}")
+
+ #   print("타입네임", type_name, "필드네임", field_names, "defaults는:", defaults)
+
+    if type(type_name) == int:
+        raise SyntaxError(f"int should not be the type_name")
+    if not type_name.isidentifier():
+        raise SyntaxError(f"Invalid type name: {type_name}")
+    if keyword.iskeyword(type_name):
+        raise SyntaxError(f"Invalid keyword name: {type_name}")
+    if type(field_names) == list or type(field_names) == str:
+        if type(field_names) == str:
+            if keyword.iskeyword(field_names):
+                raise SyntaxError(f"Invalid keyword names: {field_names}")
+        if type(field_names) == list:
+            for i in field_names:
+                if keyword.iskeyword(i):
+                    raise SyntaxError(f"Invalid keyword names: {i}")
+    else:
+        raise SyntaxError(f"Invalid field names: {field_names}")
 
 
 # check kwargs are in the fields
@@ -37,38 +59,47 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
 
     code = f'''
 class {type_name}:
-
-    _fields = {field_names}
-    _mutable = False
-
-    def __init__(self, *args):
-        self.args = args
-        self.key_list = list({defaults}.keys())
-        self.return_dict = dict()
-        for field in self._fields:
-            if field not in {defaults}.keys():
-                raise SyntaxError("the field name is invalid")
-        for keys in {defaults}.keys():
-            if keys not in self._fields:
-                raise SyntaxError("the field name is invalid")
-
-        for i in range(len(self.key_list)):
-            self.return_dict[self.key_list[i]] = self.args[i]
    
+    _fields = {field_names}
+    _mutable = True
+    return_dict = dict()
+                    
+    def __init__(self, *args, **kwargs):
+        self.args = args
+        self.kwargs = kwargs
+        self.return_dict = dict()
+       
+        if len(self.kwargs) == 0:
+            for i in range(len(self._fields)):
+                self.return_dict[self._fields[i]] = self.args[i]
+
+        if len(self.args) == 0:
+            for i in range(len(self._fields)):
+                self.return_dict[self._fields[i]] = self.kwargs[self._fields[i]]
+                
+        if len(self.kwargs) == 0 and len(self.args) == 0:
+                print("음")
+                for i in range(len(self._fields)):
+                    self.return_dict[self._fields[i]] = 0
+        
+        
+                
     def __repr__(self):
        return '{type_name}('+','.join(f"{{k}}={{v}}" for k, v in self.return_dict.items())+')'
     
     def __eq__(self, other):
         if not isinstance(other, {type_name}):
             raise TypeError('not a {type_name}')
+        print("여기는",len(self.return_dict.keys()))
         return self.return_dict == other.return_dict
        
     def _replace(self, **kwargs):
-        for i in range(len(self._fields)):
-            for key in kwargs.keys():
-                if key == self._fields[i]:
-                    self.return_dict[key] = kwargs[key]
-        return '{type_name}('+','.join(f"{{k}}={{v}}" for k, v in self.return_dict.items())+')'
+        if self._mutable:
+            for i in range(len(self._fields)):
+                for key in kwargs.keys():
+                    if key == self._fields[i]:
+                        self.return_dict[key] = kwargs[key]
+            return '{type_name}('+','.join(f"{{k}}={{v}}" for k, v in self.return_dict.items())+')'
         
     def __getitem__(self, index):
         if index >= len(self._fields):
@@ -85,7 +116,12 @@ class {type_name}:
         return False
     
     def _asdict(self):
-        return ','.join(f"'{{k}}':{{v}}" for k, v in self.return_dict.items())
+        store = ','.join(f"{{k}}:{{v}}" for k, v in self.return_dict.items())
+        dictionary = dict(i.split(":") for i in store.split(","))
+        for k, v in dictionary.items():
+            if type(v) == str:
+                dictionary[k] = int(v)
+        return dictionary
         
     def _make(iterable):
         return {type_name}(*iterable)
@@ -104,9 +140,25 @@ class {type_name}:
 
     return namespace[type_name]
 
-coordinate = mynamedtuple('coordinate', 'x,y')
-p = coordinate(3, 2)
-print("p는:", p)
+""" EQ
+return_dict = dict()
+    for i in range(len(_fields)):
+        return_dict[_fields[i]] = 0
+    print(return_dict)
+#Triple1 = mynamedtuple("Triple1", ['a', 'b', 'c'])
+#Triple2 = mynamedtuple("Triple3", ['a', 'b', 'c'])
+#print(Triple1, Triple2)
+#print(Triple1.__eq__(Triple1, Triple2))
+"""
+
+coordinate = mynamedtuple('coordinate', ['x', 'y'])
+Triple1 = mynamedtuple("Triple1", ['a', 'b', 'c'])
+t1 = Triple1(a=2, b=2, c=2)
+print(t1)
+print("replace: ,", t1._replace(a=2, b=2, c=0))
+#p = coordinate(0, 0)
+#print("p는:", p)
+
 """
 coordinate = mynamedtuple('coordinate', ['x', 'y'])
 #coordinate = mynamedtuple('coordinate', 'x,y', defaults = {'y':2})
