@@ -95,10 +95,11 @@ class DictTuple:
             length -= 1
 
     def __add__(self, right):
+        print("add")
         if type(right) is dict:
             self.dt.append(right)
             return self.dt
-        elif type(right) is DictTuple:
+        if type(right) is DictTuple:
             return self.dt + right.dt
         else:
             return NotImplemented
