@@ -22,7 +22,8 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
         raise SyntaxError(f"Invalid keyword name: {type_name}")
 
     for i in field_names:
-        if i not in defaults.keys():
+        if i not in defaults:
+
             raise SyntaxError(f"Invalid default value: {i}")
 
     for i in defaults.keys():
