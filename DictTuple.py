@@ -99,23 +99,21 @@ class DictTuple:
         if type(right) is dict:
             self.dt.append(right)
             return tuple(self.dt)
-        if type(right) is DictTuple:
-            return_dict = tuple(self.dt + right.dt)
-            return return_dict
+        elif type(right) is DictTuple:
+            return tuple(self.dt + right.dt)
         else:
-            return NotImplemented
+            return TypeError("The key is not DictTuple or Dict")
 
 
     def __radd__(self, left):
         print(type(left))
         print("여긴가")
         print("여기", self.dt, left)
-        if type(left) is dict or DictTuple:
+        if type(left) is dict:
             self.dt.insert(0, left)
-            print(self.dt)
+            return tuple(self.dt)
         else:
             raise TypeError("The key is not DictTuple or Dict")
-        return tuple(self.dt)
 
 
 
@@ -150,12 +148,12 @@ d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordi
 
 # __add__
 # 1.
-#print("d1+d2 는: ", d2+d1)
+print("d1+d2 는: ", d2+d1)
 
 # 2.
-#adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-#adict = {'c3': coordinate(3, 4)}
-#print("adict + adt: ", adt + adict)
+adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
+adict = {'c3': coordinate(3, 4)}
+print("adict + adt: ", adt + adict)
 
 # 3.
 adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
