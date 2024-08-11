@@ -15,11 +15,20 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
         if field_names[i] not in defaults.keys():
             defaults[field_names[i]] = 0
 
-  #  print("타입네임", type_name, "필드네임", field_names, "defaults는:", defaults)
+    print("타입네임", type_name, "필드네임", field_names, "defaults는:", defaults)
     if not type_name.isidentifier():
         raise SyntaxError(f"Invalid type name: {type_name}")
     if keyword.iskeyword(type_name):
         raise SyntaxError(f"Invalid keyword name: {type_name}")
+
+    for i in field_names:
+        if i not in defaults.keys():
+            raise SyntaxError(f"Invalid default value: {i}")
+
+    for i in defaults.keys():
+        if i not in field_names:
+            raise SyntaxError(f"Invalid field name value: {i}")
+
 
 # check kwargs are in the fields
 # if it is in the fields assign into the fields
@@ -95,6 +104,9 @@ class {type_name}:
 
     return namespace[type_name]
 
+coordinate = mynamedtuple('coordinate', 'x,y')
+p = coordinate(3, 2)
+print("p는:", p)
 """
 coordinate = mynamedtuple('coordinate', ['x', 'y'])
 #coordinate = mynamedtuple('coordinate', 'x,y', defaults = {'y':2})

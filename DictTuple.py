@@ -40,6 +40,9 @@ class DictTuple:
                 for left_key, left_value in left_dict.items():
                     for right_dict in other.dt:
                         for right_key, right_value in right_dict.items():
+                            print("right_value: ", right_value)
+                            for i in right_value:
+                                print("right: ", i)
                             if left_key == right_key:
                                 print(left_dict[left_key], right_dict[right_key])
                                 if left_dict[left_key] == right_dict[right_key]:
