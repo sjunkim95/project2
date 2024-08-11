@@ -23,7 +23,6 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
 
     for i in field_names:
         if i not in defaults:
-
             raise SyntaxError(f"Invalid default value: {i}")
 
     for i in defaults.keys():
