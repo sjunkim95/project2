@@ -33,7 +33,21 @@ class DictTuple:
     def __eq__(self, other):
         if not isinstance(other, DictTuple):
             raise TypeError('not a DictTuple')
-        return self.dt == other.dt
+        if len(self.dt) != len(other.dt):
+            return False
+        else:
+            for left_dict in self.dt:
+                for left_key, left_value in left_dict.items():
+                    for right_dict in other.dt:
+                        for right_key, right_value in right_dict.items():
+                            if left_key == right_key:
+                                if left_value == right_value:
+                                    return True
+                                else:
+                                    return False
+                            else:
+                                return False
+
 
     def __contains__(self, args):
         key_list = []
@@ -95,10 +109,17 @@ class DictTuple:
             length -= 1
 
     def __add__(self, right):
-        print("add")
-      #  if type(right) is dict:
-       #     self.dt.append(right)
-        #    return tuple(self.dt)
+        '''print("add")
+        if type(right) is dict:
+            print("뭐냐:", right)
+            self.right = right
+            print("self.right:", type(self.right))
+            new_dict = DictTuple(right)
+            print("new Dict는:", new_dict)
+            print("new_dict", type(new_dict))
+            print("더하면", self.dt + new_dict)
+            self.dt.append(right)
+            return tuple(self.dt)'''
         if type(right) is DictTuple:
             return tuple(self.dt + right.dt)
         else:
@@ -127,7 +148,8 @@ d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordi
 
 #print("d4 :", d4)
 # Eq 함수
-#print("eq: ", d.__eq__(d1))
+print("eq: True?", d == d1)
+#print("eq: False?", d == d2)
 # Len 함수
 #print("d.__len__():", d.__len__())
 # Bool 함수
@@ -151,9 +173,9 @@ d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordi
 #print("d1+d2 는: ", d2+d1)
 
 # 2.
-#adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-#adict = {'c3': coordinate(3, 4)}
-#print("adict + adt: ", adt + adict)
+adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
+adict = {'c3': coordinate(3, 4)}
+print("adict + adt: ", adt + adict)
 
 # 3.
 #adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
