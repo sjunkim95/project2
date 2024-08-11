@@ -94,6 +94,26 @@ class DictTuple:
                 self.dt.pop(count)
             length -= 1
 
+    def __add__(self, right):
+        if type(right) is dict:
+            self.dt.append(right)
+            return self.dt
+        elif type(right) is DictTuple:
+            return self.dt + right.dt
+        else:
+            return NotImplemented
+
+
+    def __radd__(self, left):
+        print(type(left))
+        print("여긴가")
+        print("여기", self.dt, left)
+        if type(left) is dict or DictTuple:
+            self.dt.insert(0, left)
+        else:
+            raise TypeError("The key is not DictTuple or Dict")
+        return self.dt
+
 
 
 
@@ -104,17 +124,41 @@ d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 
 
-print("d :", d4)
+#print("d4 :", d4)
+# Eq 함수
 #print("eq: ", d.__eq__(d1))
-print("d.__len__():", d.__len__())
+# Len 함수
+#print("d.__len__():", d.__len__())
+# Bool 함수
 #print("d.__bool__():", d.__bool__())
+# Repr 함수
 # print("repr(d):, ", repr(d))
+# Contains
 #print("contains: ", d4.__contains__('c2'))
-print("getitems: ", d4.__getitem__('c1'))
-print("getitems 이후: ", d4)
+# GetItems
+#print("getitems: ", d4.__getitem__('c1'))
+#print("getitems 이후: ", d4)
 #print("여기는" , d['c1'])
+# DelItems
 #print("delitems :", d.__delitem__('c1'), "그 후 d:", d)
 #print("delitems전 : ", d4)
 #print("delitems : ", d4.__delitem__('c1'), "그 후 d4: ", d4)
 #print("d.__getattr__(): ", d.__getattr__('c1'))
+
+# __add__
+# 1.
+#print("d1+d2 는: ", d2+d1)
+
+# 2.
+#adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
+#adict = {'c3': coordinate(3, 4)}
+#print("adict + adt: ", adt + adict)
+
+# 3.
+#adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
+#adict = {'c3': coordinate(3, 4)}
+
+#print("adt + adict는 : ", adict + adt)
+
+
 
