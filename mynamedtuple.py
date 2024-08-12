@@ -59,14 +59,14 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
 
     code = f'''
 class {type_name}:
-   
+
+    _mutable = {mutable}  
     _fields = {field_names}
-    _mutable = False
                     
     def __init__(self, *args, **kwargs):
+        
         self.args = args
-        self.kwargs = kwargs
-        self._mutable = True     
+        self.kwargs = kwargs  
         
         if len(self.kwargs) == 0:
             for i in range(len(self._fields)):
@@ -92,12 +92,20 @@ class {type_name}:
         return True
        
     def _replace(self, **kwargs):
-        if self._mutable:
-            for i in range(len(self._fields)):
-                for key in kwargs.keys():
-                    if key == self._fields[i]:
+        temp = dict()
+        for i in range(len(self._fields)):
+            field_name = self._fields[i]
+            temp[field_name] = self.__dict__[field_name]
+            for key in kwargs.keys():
+                if key == self._fields[i]:
+                    if self._mutable:
                         self.__dict__[key] = kwargs[key]
-            return '{type_name}('+','.join(f"{{self._fields[i]}}={{self.__dict__[self._fields[i]]}}" for i in range(len(self._fields)))+')'
+                    else:
+                        temp[key] = kwargs[key]
+        if self._mutable:
+            return None
+        else:
+            return f'{type_name}('+','.join(f"{{k}}={{v}}" for k, v in temp.items())+')'
         
     def __getitem__(self, index):
         if index >= len(self._fields):
@@ -154,7 +162,7 @@ class {type_name}:
 #p = coordinate(0, 0)
 #print("p는:", p)
 
-coordinate = mynamedtuple('coordinate', ['x', 'y'])
+#coordinate = mynamedtuple('coordinate', ['x', 'y'])
 #coordinate = mynamedtuple('coordinate', 'x,y', defaults = {'y':2})
 #print("coordinate리턴은: ", coordinate)
 #p = coordinate(0, 0)
@@ -164,12 +172,12 @@ coordinate = mynamedtuple('coordinate', ['x', 'y'])
 #print("p[0]:", p[1])
 #print("asdict:", p._asdict())
 #print("_make: ", coordinate._make((0,1)))
-origin = coordinate(0, 0)
-dif = repr(origin)
-yes = eval(dif)
-print("yes", yes.x)
-print("repr(origin)", repr(origin))
-print("여기", yes == origin)
+#origin = coordinate(0, 0)
+#dif = repr(origin)
+#yes = eval(dif)
+#print("yes", yes.x)
+#print("repr(origin)", repr(origin))
+#print("여기", yes == origin)
 #print("되나", origin.get_x())
 
 #origin = coordinate(0,0)

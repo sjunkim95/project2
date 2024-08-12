@@ -37,7 +37,7 @@ class DictTuple:
     def __eq__(self, other):
         print("eq 안에 들어옴")
         if not isinstance(other, DictTuple):
-            raise TypeError('not a DictTuple')
+            raise False
         if len(self.dt) != len(other.dt):
             return False
         else:
