@@ -169,13 +169,7 @@ class DictTuple:
         return my_list
 
     def __iter__(self):
-        print(self.dt)
-        key_list = []
-        for dictionary in self.dt:
-            for i in dictionary.keys():
-                key_list.append(i)
-        key_list = sorted(list(set(key_list)), reverse=True)
-        return key_list
+        return self
 
 
 #coordinate = mynamedtuple('coordinate', 'x y')
