@@ -169,7 +169,8 @@ class DictTuple:
         return my_list
 
     def __iter__(self):
-        return self
+        print(type(self))
+        return self.dt
 
 
 #coordinate = mynamedtuple('coordinate', 'x y')
