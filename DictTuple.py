@@ -46,12 +46,11 @@ class DictTuple:
                     print("for 두개 안:, ", left_dict, right_dict)
                     print("길이는:,", len(left_dict), len(right_dict))
                     if len(left_dict) == len(right_dict):
-                        if left_dict == right_dict:
-                            return True
-                        else:
+                        if left_dict != right_dict:
                             return False
                     else:
                         return False
+        return True
 
     def __contains__(self, args):
         key_list = []
@@ -164,10 +163,10 @@ class DictTuple:
 
 
 coordinate = mynamedtuple('coordinate', 'x y')
-#d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-#d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-#d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
-#d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
+d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
+d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
+d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
+d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 
 #print("d4['c1']", d4['c1'])
 #print("d4 :", d4)
@@ -190,8 +189,8 @@ coordinate = mynamedtuple('coordinate', 'x y')
 # Contains
 #print("contains: ", d4.__contains__('c2'))
 #GetItems
-#print("getitems: ", d4.__getitem__('c1'))
-#print("getitems 이후: ", d4)
+print("getitems: ", d4.__getitem__('c1'))
+print("getitems 이후: ", d4('c1'))
 # newGet
 #p4 = DictTuple({'a': 1, 'b': 2, 'c': 3}, {'c': 13, 'd': 14, 'e': 15}, {'e': 25, 'f': 26, 'g': 27})
 #print("getItems: ", p4.__getitem__('e'))
@@ -204,7 +203,7 @@ coordinate = mynamedtuple('coordinate', 'x y')
 
 # __add__
 # 1.
-#print("d1+d2 는: ", d2+d1)
+print("d1+d2 는: ", d2+d1)
 
 # 2.
 #adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
