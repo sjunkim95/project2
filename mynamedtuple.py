@@ -86,7 +86,8 @@ class {type_name}:
         
                 
     def __repr__(self):
-       return '{type_name}('+','.join(f"{{k}}={{v}}" for k, v in self.return_dict.items())+')'
+        print("리턴딕트:", self.return_dict, "타입네임", {type_name})
+        return '{type_name}('+','.join(f"{{k}}={{v}}" for k, v in self.return_dict.items())+')'
     
     def __eq__(self, other):
         print("EQ myname 들어옴")
@@ -141,19 +142,11 @@ class {type_name}:
 
     return namespace[type_name]
 
-'''
-if not isinstance(other, {type_name}):
-            raise TypeError('not a {type_name}')
-'''
-#return_dict = dict()
-#    for i in range(len(_fields)):
-#        return_dict[_fields[i]] = 0
-#s   print(return_dict)
 
-Triple1 = mynamedtuple("Triple1", ['a', 'b', 'c'])
-Triple2 = mynamedtuple("Triple3", ['a', 'b', 'c'])
-print(Triple1, Triple2)
-print(Triple1.__eq__(Triple1, Triple2))
+#Triple1 = mynamedtuple("Triple1", ['a', 'b', 'c'])
+#Triple2 = mynamedtuple("Triple3", ['a', 'b', 'c'])
+#print(Triple1.a)
+#print(Triple1.__eq__(Triple1, Triple2))
 
 
 #coordinate = mynamedtuple('coordinate', ['x', 'y'])
