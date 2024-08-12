@@ -169,7 +169,7 @@ class DictTuple:
         return my_list
 
     def __iter__(self):
-        length = len(self.dt)
+        length = len(self.dt)-1
         def gen_function(n):
             while n >= 0:
                 print("여기: ", self.dt[n].keys()[n])
