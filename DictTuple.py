@@ -92,10 +92,9 @@ class DictTuple:
 
         if type(k) == str:
             for dictionaries in reversed(self.dt):
-                print(self.dt)
                 return_list = []
                 for key, value in dictionaries.items():
-                    print("밸류는", key, value)
+                   # print("밸류는", key, value)
                     if k == key:
                         if type(value) is int:
                             return value
@@ -187,12 +186,41 @@ class DictTuple:
 
         return self
 
+    def __setitem__(self, index, value):
+        print("set items 들어옴")
+        print("요소들: ", index, value)
+        print("self.dt는:", self.dt)
+        key_lists = []
+        for dictionaries in self.dt:
+            for key in dictionaries.keys():
+                key_lists.append(key)
+
+        if index not in key_lists:
+            self.dt.append({index:value})
+
+        for dictionaries in reversed(self.dt):
+            print("일단", dictionaries)
+            if index in dictionaries.keys():
+                print("여기는")
+                dictionaries[index] = value
+                break
+
+        print("더한 이후 self.dt", self.dt)
+
+
 
 coordinate = mynamedtuple('coordinate', 'x y')
 #d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
-d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
+#d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
+
+# set items
+#print("set items 없을때: ")
+#d4['c4'] = 1
+#p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
+#print("set items 있을때: ")
+#p['b'] = 13
 #print("iter: ", d4.__iter__())
 #print("d4['c1']", d4['c1'])
 #print("d4 :", d4)
@@ -215,8 +243,8 @@ d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordi
 # Contains
 #print("contains: ", d4.__contains__('c2'))
 #GetItems
-print("getitems: ", d4.__getitem__('c1'))
-print("getitems : ", d4['c1'])
+#print("getitems: ", d4.__getitem__('c1'))
+#print("getitems : ", d4['c1'])
 # newGet
 #p4 = DictTuple({'a': 1, 'b': 2, 'c': 3}, {'c': 13, 'd': 14, 'e': 15}, {'e': 25, 'f': 26, 'g': 27})
 #print("getItems: ", p4.__getitem__('e'))
