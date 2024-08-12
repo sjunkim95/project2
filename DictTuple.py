@@ -169,18 +169,10 @@ class DictTuple:
         return my_list
 
     def __iter__(self):
-        key_list = []
-        for dictionaries in self.dt:
-            for i in dictionaries:
-                key_list.append(i)
-        length = len(key_list)
+        for dictionary in self.dt:
+            yield dictionary.keys()
 
-        def gen_function(n):
-            count = 0
-            while n > count:
-                yield list(self.dt[0].keys())[count]
-                count += 1
-        return gen_function(length)
+        return self
 
 
 #coordinate = mynamedtuple('coordinate', 'x y')
@@ -246,10 +238,10 @@ class DictTuple:
 #print("eq: True", p == p1)
 
 
-#p3 = DictTuple({'c': 13, 'd': 14, 'e': 15})
+#p3 = DictTuple({'a': 1, 'b': 2, 'c': 3}, {'c': 13, 'd': 14, 'e': 15}, {'e': 25, 'f': 26, 'g': 27})
 #print("ITER 보자:", p3.__iter__())
 #print("ITER 이어서:", iter(p3))
 
 #for i in p3:
-#    print(str(i) + ', ', end = '')
+ #   print(str(i) + ', ', end = '')
 #    print('finished')
