@@ -132,8 +132,7 @@ class {type_name}:
         return dictionary
         
     def _make(iterable):
-        return {type_name}(*iterable)
-            
+        return {type_name}(*iterable)          
       
 '''
 

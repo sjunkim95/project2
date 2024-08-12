@@ -41,22 +41,22 @@ class DictTuple:
 
     def __eq__(self, other):
         print("eq 안에 들어옴")
+        length = len(self.dt)
         if not isinstance(other, DictTuple):
             raise False
         if len(self.dt) != len(other.dt):
             return False
         else:
-            for left_dict in self.dt:
-                for right_dict in other.dt:
-                    print("for 두개 안:, ", left_dict, right_dict)
-                    print("길이는:,", len(left_dict), len(right_dict))
-                    if len(left_dict) == len(right_dict):
-                        if left_dict != right_dict:
-                            return False
-                        else:
-                            return False
-                    else:
-                        return False
+            print("두개 비교:" , self.dt, other.dt)
+            for i in range(length):
+                left_dict = self.dt[i]
+                right_dict = other.dt[i]
+                print("left_dict", left_dict)
+                print("right_dict", right_dict)
+                if left_dict != right_dict:
+                    return False
+
+        print("뭐냐")
         return True
 
     def __contains__(self, args):
