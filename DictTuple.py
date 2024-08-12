@@ -6,8 +6,8 @@ class DictTuple:
         self.dt = [dictionaries for dictionaries in kwargs]
         print("받은값: ", self.dt)
 
-        if self.dt == None:
-            print("여기")
+        if len(self.dt) == 0:
+            raise AssertionError("Dictionary is empty")
 
         if type(self.dt[0]) == dict:
             if len(self.dt[0]) == 0:
@@ -217,12 +217,12 @@ coordinate = mynamedtuple('coordinate', 'x y')
 #print("adt + adict는 : ", adict + adt)
 
 # new EQ
-p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
+#p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
 #p1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
-p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
-print("더하기", p+p2)
-p3 = DictTuple()
-print("없다면:", p3)
+#p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
+#print("더하기", p+p2)
+#p3 = DictTuple()
+#print("없다면:", p3)
 #print("eq: False", p1 == p2)
 #print("eq: True", p == p1)
 
