@@ -85,9 +85,11 @@ class {type_name}:
         print("EQ myname 들어옴")
         if not isinstance(other, {type_name}):
             return False
-            for i in range(len(self._fields)):
-                return self._fields[i] == other._fields[i]
-        return self.return_dict == other.return_dict
+        for i in range(len(self._fields)):
+            field_name = self._fields[i]
+            if (self.__dict__[field_name] != other.__dict__[field_name]):
+                return False
+        return True
        
     def _replace(self, **kwargs):
         if self._mutable:
@@ -152,7 +154,7 @@ class {type_name}:
 #p = coordinate(0, 0)
 #print("p는:", p)
 
-#coordinate = mynamedtuple('coordinate', ['x', 'y'])
+coordinate = mynamedtuple('coordinate', ['x', 'y'])
 #coordinate = mynamedtuple('coordinate', 'x,y', defaults = {'y':2})
 #print("coordinate리턴은: ", coordinate)
 #p = coordinate(0, 0)
@@ -162,12 +164,12 @@ class {type_name}:
 #print("p[0]:", p[1])
 #print("asdict:", p._asdict())
 #print("_make: ", coordinate._make((0,1)))
-#origin = coordinate(0, 0)
-#dif = repr(origin)
-#yes = eval(dif)
-#print("yes", yes.x)
-#print("repr(origin)", repr(origin))
-#print("여기", yes == origin)
+origin = coordinate(0, 0)
+dif = repr(origin)
+yes = eval(dif)
+print("yes", yes.x)
+print("repr(origin)", repr(origin))
+print("여기", yes == origin)
 #print("되나", origin.get_x())
 
 #origin = coordinate(0,0)
