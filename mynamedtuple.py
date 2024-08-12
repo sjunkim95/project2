@@ -32,7 +32,7 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
         if i not in field_names:
             raise SyntaxError(f"Invalid field name value: {i}")
 
- #   print("타입네임", type_name, "필드네임", field_names, "defaults는:", defaults)
+    print("타입네임", type_name, "필드네임", field_names, "defaults는:", defaults)
 
     if type(type_name) == int:
         raise SyntaxError(f"int should not be the type_name")
@@ -89,8 +89,9 @@ class {type_name}:
        return '{type_name}('+','.join(f"{{k}}={{v}}" for k, v in self.return_dict.items())+')'
     
     def __eq__(self, other):
-        
-        print("여기는 myname",len(self.return_dict.keys()))
+        print("EQ myname 들어옴")
+        if not isinstance(other, {type_name}):
+            return False
         return self.return_dict == other.return_dict
        
     def _replace(self, **kwargs):
