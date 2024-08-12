@@ -5,11 +5,7 @@ class DictTuple:
 
         self.dt = [dictionaries for dictionaries in kwargs]
         print("받은값: ", self.dt)
-        #for dicts in self.dt:
-         #   print("",dicts)
-            #if len(dicts) == 1:
-          #  print(type(dicts))
-           # print(len(dicts))
+
         if type(self.dt[0]) == dict:
             if len(self.dt[0]) == 0:
                 raise AssertionError("Dictionary is empty")
@@ -43,26 +39,17 @@ class DictTuple:
             return False
         else:
             for left_dict in self.dt:
-                for left_key, left_value in left_dict.items():
-                    for right_dict in other.dt:
-                        for right_key, right_value in right_dict.items():
-                            if type(right_value) == int:
-                                if left_key == right_key:
-                                    if left_dict[left_key] == right_dict[right_key]:
-                                        pass
-                                    else:
-                                        return False
-                                else:
-                                    return False
-                            else:
-                                if left_key == right_key:
-                                    if left_dict[left_key] == right_dict[right_key]:
-                                        pass
-                                    else:
-                                        return False
-                                else:
-                                    return False
-        return True
+                for right_dict in other.dt:
+                    print("for 두개 안:, ", left_dict, right_dict)
+                    print("길이는:,", len(left_dict), len(right_dict))
+                    if len(left_dict) == len(right_dict):
+                        if left_dict == right_dict:
+                            return True
+                        else:
+                            return False
+                    else:
+                        return False
+
     def __contains__(self, args):
         key_list = []
         for dictionaries in self.dt:
@@ -98,8 +85,6 @@ class DictTuple:
                             for i in value:
                                 return_list.append(i)
 
-
-
                         return tuple(return_list)
 
         else:
@@ -130,6 +115,7 @@ class DictTuple:
             length -= 1
 
     def __add__(self, right):
+        print("add 안에 들어옴")
         '''print("add")
         if type(right) is dict:
             print("뭐냐:", right)
@@ -149,7 +135,7 @@ class DictTuple:
 
     def __radd__(self, left):
         print(type(left))
-        print("여긴가")
+        print("__radd__ 들어옴")
         print("여기", self.dt, left)
         if type(left) is dict:
             self.dt.insert(0, left)
@@ -158,6 +144,7 @@ class DictTuple:
             raise TypeError("The key is not DictTuple or Dict")
 
     def __call__(self, argument):
+        print("__call__ 들어옴")
         my_list = []
         for dictionaries in self.dt:
             for key, values in dictionaries.items():
@@ -174,22 +161,22 @@ class DictTuple:
 
 
 coordinate = mynamedtuple('coordinate', 'x y')
-d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
+#d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
+#d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 #d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 
 #print("d4['c1']", d4['c1'])
 #print("d4 :", d4)
 #print("d4 __call__ :", d4.__call__(argument='c1'))
-#print("여기는:", d('c1'))
 
 #test1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
 #test2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
 #print("EQ는: ", test1 == test2)
 
 # Eq 함수
-print("eq: True?", d == d1)
+# mynamed도 불려오네
+#print("eq: True?", d == d1)
 #print("eq: False?", d == d2)
 # Len 함수
 #print("d.__len__():", d.__len__())
@@ -202,7 +189,7 @@ print("eq: True?", d == d1)
 # GetItems
 #print("getitems: ", d4.__getitem__('c1'))
 #print("getitems 이후: ", d4)
-#print("여기는" , d['c1'])
+
 # DelItems
 #print("delitems :", d.__delitem__('c1'), "그 후 d:", d)
 #print("delitems전 : ", d4)
@@ -223,5 +210,10 @@ print("eq: True?", d == d1)
 #adict = {'c3': coordinate(3, 4)}
 #print("adt + adict는 : ", adict + adt)
 
-
+# new EQ
+#p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
+#p1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
+#p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
+#print("eq: False", p1 == p2)
+#print("eq: True", p == p1)
 

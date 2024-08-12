@@ -61,13 +61,14 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
 class {type_name}:
    
     _fields = {field_names}
-    _mutable = True
+    _mutable = False
     return_dict = dict()
                     
     def __init__(self, *args, **kwargs):
         self.args = args
         self.kwargs = kwargs
         self.return_dict = dict()
+        self._mutable = True
        
         if len(self.kwargs) == 0:
             for i in range(len(self._fields)):
@@ -90,7 +91,7 @@ class {type_name}:
     def __eq__(self, other):
         if not isinstance(other, {type_name}):
             raise TypeError('not a {type_name}')
-        print("여기는",len(self.return_dict.keys()))
+        print("여기는 myname",len(self.return_dict.keys()))
         return self.return_dict == other.return_dict
        
     def _replace(self, **kwargs):
