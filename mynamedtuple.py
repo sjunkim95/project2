@@ -62,32 +62,26 @@ class {type_name}:
    
     _fields = {field_names}
     _mutable = False
-    return_dict = dict()
                     
     def __init__(self, *args, **kwargs):
         self.args = args
         self.kwargs = kwargs
-        self.return_dict = dict()
-        self._mutable = True
-       
+        self._mutable = True     
+        
         if len(self.kwargs) == 0:
             for i in range(len(self._fields)):
-                self.return_dict[self._fields[i]] = self.args[i]
+                field_name = self._fields[i]
+                self.__dict__[field_name]= self.args[i]
 
         if len(self.args) == 0:
             for i in range(len(self._fields)):
-                self.return_dict[self._fields[i]] = self.kwargs[self._fields[i]]
-                
-        if len(self.kwargs) == 0 and len(self.args) == 0:
-                print("음")
-                for i in range(len(self._fields)):
-                    self.return_dict[self._fields[i]] = 0
+                field_name = self._fields[i]
+                self.__dict__[field_name]= self.args[i]
         
-        
-                
     def __repr__(self):
-        print("리턴딕트:", self.return_dict, "타입네임", {type_name})
-        return '{type_name}('+','.join(f"{{k}}={{v}}" for k, v in self.return_dict.items())+')'
+        print('coordinate(x=0,y=0)')
+        
+        return '{type_name}('+','.join(f"{{self._fields[i]}}={{self.__dict__[self._fields[i]]}}" for i in range(len(self._fields)))+')'
     
     def __eq__(self, other):
         print("EQ myname 들어옴")
@@ -100,14 +94,14 @@ class {type_name}:
             for i in range(len(self._fields)):
                 for key in kwargs.keys():
                     if key == self._fields[i]:
-                        self.return_dict[key] = kwargs[key]
-            return '{type_name}('+','.join(f"{{k}}={{v}}" for k, v in self.return_dict.items())+')'
+                        self.__dict__[key] = kwargs[key]
+            return '{type_name}('+','.join(f"{{self._fields[i]}}={{self.__dict__[self._fields[i]]}}" for i in range(len(self._fields)))+')'
         
     def __getitem__(self, index):
         if index >= len(self._fields):
             raise IndexError("Index out of range")
         if type(index) is int:
-            return self.return_dict[self._fields[index]]
+            return self.__dict__[self._fields[index]]
         else:
             raise TypeError("the index is not int")
    
@@ -118,7 +112,7 @@ class {type_name}:
         return False
     
     def _asdict(self):
-        store = ','.join(f"{{k}}:{{v}}" for k, v in self.return_dict.items())
+        store = ','.join(f"{{self._fields[i]}}:{{self.__dict__[self._fields[i]]}}" for i in range(len(self._fields)))
         dictionary = dict(i.split(":") for i in store.split(","))
         for k, v in dictionary.items():
             if type(v) == str:
@@ -134,7 +128,7 @@ class {type_name}:
     for i in field_names:
         code += f'''
     def get_{i}(self):
-        return self.return_dict['{i}']
+        return self.__dict__['{i}']
         '''
 
     namespace = {}
@@ -157,17 +151,16 @@ class {type_name}:
 #p = coordinate(0, 0)
 #print("p는:", p)
 
-"""
-coordinate = mynamedtuple('coordinate', ['x', 'y'])
+#coordinate = mynamedtuple('coordinate', ['x', 'y'])
 #coordinate = mynamedtuple('coordinate', 'x,y', defaults = {'y':2})
-print("coordinate리턴은: ", coordinate)
-p = coordinate(3, 2)
-print("p는:", p)
-print("replace: ", p._replace(y=5))
-print("get함수:", p.get_x())
-print("p[0]:", p[1])
-print("asdict:", p._asdict())
-print("_make: ", coordinate._make((0,1)))
+#print("coordinate리턴은: ", coordinate)
+#p = coordinate(0, 0)
+#print("p는:", p)
+#print("replace: ", p._replace(y=5))
+#print("get함수:", p.get_x())
+#print("p[0]:", p[1])
+#print("asdict:", p._asdict())
+#print("_make: ", coordinate._make((0,1)))
 #origin = coordinate(0, 0)
 #dif = repr(origin)
 #yes = eval(dif)
@@ -176,7 +169,6 @@ print("_make: ", coordinate._make((0,1)))
 #print("여기", yes == origin)
 #print("되나", origin.get_x())
 
-origin = coordinate(0,0)
-new_origin = origin._replace(y=5)
-print(origin, new_origin)
-"""
+#origin = coordinate(0,0)
+#new_origin = origin._replace(y=5)
+#print(origin, new_origin)
