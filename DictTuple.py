@@ -228,8 +228,8 @@ class DictTuple:
 #p1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
 #p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
 #print("더하기", p+p2)
-p3 = DictTuple({'a': 1, 'b': 2}, {}, {'a': 1, 'b': 2})
-print("없다면:", p3)
+#p3 = DictTuple({'a': 1, 'b': 2}, {}, {'a': 1, 'b': 2})
+#print("없다면:", p3)
 #print("eq: False", p1 == p2)
 #print("eq: True", p == p1)
 
