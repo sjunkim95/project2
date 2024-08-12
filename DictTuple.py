@@ -15,6 +15,12 @@ class DictTuple:
         else:
             raise AssertionError(f"DictTuple.__init__:{self.dt[0]} is not a dictionary")
 
+        print(len(self.dt))
+        for i in range(len(self.dt)):
+            if len(self.dt[i]) == 0:
+                raise AssertionError("Dictionary is empty")
+
+
     def __len__(self):
         len_set = set()
         for dictionary in self.dt:
@@ -164,11 +170,11 @@ class DictTuple:
         return my_list
 
 
-coordinate = mynamedtuple('coordinate', 'x y')
-d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
-d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
+#coordinate = mynamedtuple('coordinate', 'x y')
+#d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
+#d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
+#d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
+#d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 
 #print("d4['c1']", d4['c1'])
 #print("d4 :", d4)
@@ -222,8 +228,8 @@ d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordi
 #p1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
 #p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
 #print("더하기", p+p2)
-#p3 = DictTuple()
-#print("없다면:", p3)
+p3 = DictTuple({'a': 1, 'b': 2}, {}, {'a': 1, 'b': 2})
+print("없다면:", p3)
 #print("eq: False", p1 == p2)
 #print("eq: True", p == p1)
 
