@@ -97,15 +97,16 @@ class {type_name}:
             field_name = self._fields[i]
             temp[field_name] = self.__dict__[field_name]
             for key in kwargs.keys():
-                if key == self._fields[i]:
-                    if self._mutable:
-                        self.__dict__[key] = kwargs[key]
-                    else:
-                        temp[key] = kwargs[key]
+                if key not in self._fields:
+                    raise TypeError("Key is wrong")
+                if self._mutable:
+                    self.__dict__[key] = kwargs[key]
+                else:
+                    temp[key] = kwargs[key]
         if self._mutable:
             return None
         else:
-            return f'{type_name}('+','.join(f"{{k}}={{v}}" for k, v in temp.items())+')'
+            return eval(f'{type_name}('+','.join(f"{{k}}={{v}}" for k, v in temp.items())+')')
         
     def __getitem__(self, index):
         if index >= len(self._fields):
@@ -162,7 +163,7 @@ class {type_name}:
 #p = coordinate(0, 0)
 #print("p는:", p)
 
-#coordinate = mynamedtuple('coordinate', ['x', 'y'])
+coordinate = mynamedtuple('coordinate', ['x', 'y'])
 #coordinate = mynamedtuple('coordinate', 'x,y', defaults = {'y':2})
 #print("coordinate리턴은: ", coordinate)
 #p = coordinate(0, 0)
@@ -180,6 +181,6 @@ class {type_name}:
 #print("여기", yes == origin)
 #print("되나", origin.get_x())
 
-#origin = coordinate(0,0)
-#new_origin = origin._replace(y=5)
-#print(origin, new_origin)
+origin = coordinate(0,0)
+new_origin = origin._replace(y=5)
+print(origin, new_origin)
