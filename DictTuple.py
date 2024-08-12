@@ -6,7 +6,6 @@ class DictTuple:
         self.dt = [dictionaries for dictionaries in kwargs]
         print("받은값: ", self.dt)
 
-
         if len(self.dt) == 0:
             raise AssertionError("Dictionary is empty")
 
@@ -48,6 +47,8 @@ class DictTuple:
                     print("길이는:,", len(left_dict), len(right_dict))
                     if len(left_dict) == len(right_dict):
                         if left_dict != right_dict:
+                            return False
+                        else:
                             return False
                     else:
                         return False
@@ -190,8 +191,8 @@ d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordi
 # Contains
 #print("contains: ", d4.__contains__('c2'))
 #GetItems
-print("getitems: ", d4.__getitem__('c1'))
-print("getitems 이후: ", d4('c1'))
+#print("getitems: ", d4.__getitem__('c1'))
+#print("getitems 이후: ", d4('c1'))
 # newGet
 #p4 = DictTuple({'a': 1, 'b': 2, 'c': 3}, {'c': 13, 'd': 14, 'e': 15}, {'e': 25, 'f': 26, 'g': 27})
 #print("getItems: ", p4.__getitem__('e'))
@@ -204,7 +205,7 @@ print("getitems 이후: ", d4('c1'))
 
 # __add__
 # 1.
-print("d1+d2 는: ", d2+d1)
+#print("d1+d2 는: ", d2+d1)
 
 # 2.
 #adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
