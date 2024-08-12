@@ -15,7 +15,6 @@ class DictTuple:
         else:
             raise AssertionError(f"DictTuple.__init__:{self.dt[0]} is not a dictionary")
 
-        print(len(self.dt))
         for i in range(len(self.dt)):
             if len(self.dt[i]) == 0:
                 raise AssertionError("Dictionary is empty")
@@ -169,13 +168,22 @@ class DictTuple:
                         my_list.append(inner_list)
         return my_list
 
+    def __iter__(self):
+        print(self.dt)
+        key_list = []
+        for dictionary in self.dt:
+            for i in dictionary.keys():
+                key_list.append(i)
+        key_list = sorted(list(set(key_list)), reverse=True)
+        return key_list
 
-#coordinate = mynamedtuple('coordinate', 'x y')
+
+coordinate = mynamedtuple('coordinate', 'x y')
 #d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
-#d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
-
+d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
+print("iter: ", d4.__iter__())
 #print("d4['c1']", d4['c1'])
 #print("d4 :", d4)
 #print("d4 __call__ :", d4.__call__(argument='c1'))
