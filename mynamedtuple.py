@@ -32,7 +32,7 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
         if i not in field_names:
             raise SyntaxError(f"Invalid field name value: {i}")
 
-    print("타입네임", type_name, "필드네임", field_names, "defaults는:", defaults)
+   # print("타입네임", type_name, "필드네임", field_names, "defaults는:", defaults)
 
     if type(type_name) == int:
         raise SyntaxError(f"int should not be the type_name")
