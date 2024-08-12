@@ -176,10 +176,11 @@ class DictTuple:
         length = len(key_list)
 
         def gen_function(n):
-            while n >= 0:
-                yield list(self.dt[0].keys())[n]
-                n -= 1
-        return gen_function(length-1)
+            count = 0
+            while n > count:
+                yield list(self.dt[0].keys())[count]
+                count += 1
+        return gen_function(length)
 
 
 #coordinate = mynamedtuple('coordinate', 'x y')
@@ -249,3 +250,6 @@ class DictTuple:
 #print("ITER 보자:", p3.__iter__())
 #print("ITER 이어서:", iter(p3))
 
+#for i in p3:
+#    print(str(i) + ', ', end = '')
+#    print('finished')
