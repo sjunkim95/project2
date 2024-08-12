@@ -80,18 +80,18 @@ class DictTuple:
 
     def __getitem__(self, k):
         print("get item 안에 들어옴")
+
         if type(self.dt) is tuple:
             self.dt = list(self.dt)
-        self.dt.reverse()
         dict_keys = []
-        for dictionary in self.dt:
+        for dictionary in reversed(self.dt):
             for key in dictionary.keys():
                 dict_keys.append(key)
         if k not in dict_keys:
             raise KeyError("The key does not exists")
 
         if type(k) == str:
-            for dictionaries in self.dt:
+            for dictionaries in reversed(self.dt):
                 print(self.dt)
                 return_list = []
                 for key, value in dictionaries.items():
@@ -188,11 +188,11 @@ class DictTuple:
         return self
 
 
-#coordinate = mynamedtuple('coordinate', 'x y')
+coordinate = mynamedtuple('coordinate', 'x y')
 #d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
-#d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
+d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 #print("iter: ", d4.__iter__())
 #print("d4['c1']", d4['c1'])
 #print("d4 :", d4)
@@ -215,8 +215,8 @@ class DictTuple:
 # Contains
 #print("contains: ", d4.__contains__('c2'))
 #GetItems
-#print("getitems: ", d4.__getitem__('c1'))
-#print("getitems 이후: ", d4('c1'))
+print("getitems: ", d4.__getitem__('c1'))
+print("getitems : ", d4['c1'])
 # newGet
 #p4 = DictTuple({'a': 1, 'b': 2, 'c': 3}, {'c': 13, 'd': 14, 'e': 15}, {'e': 25, 'f': 26, 'g': 27})
 #print("getItems: ", p4.__getitem__('e'))
@@ -242,13 +242,16 @@ class DictTuple:
 #print("adt + adict는 : ", adict + adt)
 
 # new EQ
-p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
-p1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
-p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
+#p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
+#p1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
+#p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
 #print("더하기", p+p2)
 
-#print("eq: False", p1 == p2)
-print("eq: True", p == p1)
+#print("eq: False", p1.__eq__(p2))
+#print("eq: True", p.__eq__(p1))
+#print("eq?? :", p['a'] == p1['a'])
+#print("eq?? :", p1['b'] == p2['b'])
+
 
 
 #p3 = DictTuple({'a': 1, 'b': 2, 'c': 3}, {'c': 13, 'd': 14, 'e': 15}, {'e': 25, 'f': 26, 'g': 27})

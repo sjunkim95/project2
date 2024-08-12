@@ -51,12 +51,6 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
     else:
         raise SyntaxError(f"Invalid field names: {field_names}")
 
-
-# check kwargs are in the fields
-# if it is in the fields assign into the fields
-# if there is no raise an error
-
-
     code = f'''
 class {type_name}:
 
@@ -163,7 +157,6 @@ class {type_name}:
 #print("p는:", p)
 
 coordinate = mynamedtuple('coordinate', ['x', 'y'])
-#coordinate = mynamedtuple('coordinate', 'x,y', defaults = {'y':2})
 #print("coordinate리턴은: ", coordinate)
 #p = coordinate(0, 0)
 #print("p는:", p)
