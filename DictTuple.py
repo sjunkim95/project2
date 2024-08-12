@@ -170,7 +170,7 @@ class DictTuple:
 
     def __iter__(self):
         for dictionary in self.dt:
-            yield dictionary.keys()
+            yield list(dictionary.keys())
 
         return self
 
