@@ -170,7 +170,7 @@ class DictTuple:
 
     def __iter__(self):
         total_list = []
-        for dictionary in self.dt:
+        for dictionary in reversed(self.dt):
             for key in dictionary.keys():
                 if key not in total_list:
                     yield key
