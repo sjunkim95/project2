@@ -46,17 +46,26 @@ class DictTuple:
             return False
         if len(self.dt) != len(other.dt):
             return False
-        else:
-            print("두개 비교:", self.dt, other.dt)
-            for i in range(length):
-                left_dict = self.dt[i]
-                right_dict = other.dt[i]
-                print("left_dict", left_dict)
-                print("right_dict", right_dict)
-                if left_dict != right_dict:
+
+        print("두개 비교:", self.dt, other.dt)
+        for i in range(length):
+            left_dict = self.dt[i]
+            right_dict = other.dt[i]
+            print("left_dict", left_dict)
+            print("right_dict", right_dict)
+
+            for left_key in left_dict:
+                print("left_key", left_key)
+                if left_dict[left_key] != right_dict[left_key]:
+                    print("여기, ",left_dict[left_key], right_dict[left_key])
                     return False
 
-        print("뭐냐")
+            for right_key in right_dict:
+                if right_dict[right_key] != left_dict[right_key]:
+                    print("여기2", right_dict[right_key], left_dict[right_key])
+                    return False
+
+
         return True
 
     def __contains__(self, args):
@@ -233,13 +242,13 @@ class DictTuple:
 #print("adt + adict는 : ", adict + adt)
 
 # new EQ
-#p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
+p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
 p1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
 p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
 #print("더하기", p+p2)
 
-print("eq: False", p1 == p2)
-#print("eq: True", p == p1)
+#print("eq: False", p1 == p2)
+print("eq: True", p == p1)
 
 
 #p3 = DictTuple({'a': 1, 'b': 2, 'c': 3}, {'c': 13, 'd': 14, 'e': 15}, {'e': 25, 'f': 26, 'g': 27})
