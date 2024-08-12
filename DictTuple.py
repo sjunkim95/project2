@@ -178,12 +178,12 @@ class DictTuple:
         return key_list
 
 
-coordinate = mynamedtuple('coordinate', 'x y')
+#coordinate = mynamedtuple('coordinate', 'x y')
 #d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
-d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
-print("iter: ", d4.__iter__())
+#d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
+#print("iter: ", d4.__iter__())
 #print("d4['c1']", d4['c1'])
 #print("d4 :", d4)
 #print("d4 __call__ :", d4.__call__(argument='c1'))
@@ -236,8 +236,11 @@ print("iter: ", d4.__iter__())
 #p1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
 #p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
 #print("더하기", p+p2)
-#p3 = DictTuple({'a': 1, 'b': 2}, {}, {'a': 1, 'b': 2})
-#print("없다면:", p3)
+
 #print("eq: False", p1 == p2)
 #print("eq: True", p == p1)
+
+
+p3 = DictTuple({'c': 13, 'd': 14, 'e': 15})
+print("ITER 보자:", p3.__iter__())
 
