@@ -76,17 +76,17 @@ class {type_name}:
         if len(self.args) == 0:
             for i in range(len(self._fields)):
                 field_name = self._fields[i]
-                self.__dict__[field_name]= self.args[i]
-        
+                self.__dict__[field_name]= self.kwargs[field_name]
+                
     def __repr__(self):
-        print('coordinate(x=0,y=0)')
-        
         return '{type_name}('+','.join(f"{{self._fields[i]}}={{self.__dict__[self._fields[i]]}}" for i in range(len(self._fields)))+')'
     
     def __eq__(self, other):
         print("EQ myname 들어옴")
         if not isinstance(other, {type_name}):
             return False
+            for i in range(len(self._fields)):
+                return self._fields[i] == other._fields[i]
         return self.return_dict == other.return_dict
        
     def _replace(self, **kwargs):
@@ -113,6 +113,7 @@ class {type_name}:
     
     def _asdict(self):
         store = ','.join(f"{{self._fields[i]}}:{{self.__dict__[self._fields[i]]}}" for i in range(len(self._fields)))
+        
         dictionary = dict(i.split(":") for i in store.split(","))
         for k, v in dictionary.items():
             if type(v) == str:
