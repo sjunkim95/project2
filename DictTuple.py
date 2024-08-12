@@ -169,8 +169,12 @@ class DictTuple:
         return my_list
 
     def __iter__(self):
-        print(type(self))
-        return self.dt
+        length = len(self.dt)
+        def gen_function(n):
+            while n >= 0:
+                yield n
+                n -= 1
+        return gen_function(length)
 
 
 #coordinate = mynamedtuple('coordinate', 'x y')
