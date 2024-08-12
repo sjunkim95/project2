@@ -43,11 +43,11 @@ class DictTuple:
         print("eq 안에 들어옴")
         length = len(self.dt)
         if not isinstance(other, DictTuple):
-            raise False
+            return False
         if len(self.dt) != len(other.dt):
             return False
         else:
-            print("두개 비교:" , self.dt, other.dt)
+            print("두개 비교:", self.dt, other.dt)
             for i in range(length):
                 left_dict = self.dt[i]
                 right_dict = other.dt[i]
@@ -234,11 +234,11 @@ class DictTuple:
 
 # new EQ
 #p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
-#p1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
-#p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
+p1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
+p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
 #print("더하기", p+p2)
 
-#print("eq: False", p1 == p2)
+print("eq: False", p1 == p2)
 #print("eq: True", p == p1)
 
 
