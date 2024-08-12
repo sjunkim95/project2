@@ -169,9 +169,12 @@ class DictTuple:
         return my_list
 
     def __iter__(self):
+        total_list = []
         for dictionary in self.dt:
             for key in dictionary.keys():
-                yield key
+                if key not in total_list:
+                    yield key
+                total_list.append(key)
 
         return self
 
@@ -245,4 +248,4 @@ class DictTuple:
 
 #for i in p3:
  #   print(str(i) + ', ', end = '')
- #   print('finished')
+  #  print('finished')
