@@ -89,8 +89,7 @@ class {type_name}:
        return '{type_name}('+','.join(f"{{k}}={{v}}" for k, v in self.return_dict.items())+')'
     
     def __eq__(self, other):
-        if not isinstance(other, {type_name}):
-            raise TypeError('not a {type_name}')
+        
         print("여기는 myname",len(self.return_dict.keys()))
         return self.return_dict == other.return_dict
        
@@ -141,22 +140,26 @@ class {type_name}:
 
     return namespace[type_name]
 
-""" EQ
-return_dict = dict()
-    for i in range(len(_fields)):
-        return_dict[_fields[i]] = 0
-    print(return_dict)
-#Triple1 = mynamedtuple("Triple1", ['a', 'b', 'c'])
-#Triple2 = mynamedtuple("Triple3", ['a', 'b', 'c'])
-#print(Triple1, Triple2)
-#print(Triple1.__eq__(Triple1, Triple2))
-"""
+'''
+if not isinstance(other, {type_name}):
+            raise TypeError('not a {type_name}')
+'''
+#return_dict = dict()
+#    for i in range(len(_fields)):
+#        return_dict[_fields[i]] = 0
+#s   print(return_dict)
 
-coordinate = mynamedtuple('coordinate', ['x', 'y'])
 Triple1 = mynamedtuple("Triple1", ['a', 'b', 'c'])
-t1 = Triple1(a=2, b=2, c=2)
-print(t1)
-print("replace: ,", t1._replace(a=2, b=2, c=0))
+Triple2 = mynamedtuple("Triple3", ['a', 'b', 'c'])
+print(Triple1, Triple2)
+print(Triple1.__eq__(Triple1, Triple2))
+
+
+#coordinate = mynamedtuple('coordinate', ['x', 'y'])
+#Triple1 = mynamedtuple("Triple1", ['a', 'b', 'c'])
+#t1 = Triple1(a=2, b=2, c=2)
+#print(t1)
+#print("replace: ,", t1._replace(a=2, b=2, c=0))
 #p = coordinate(0, 0)
 #print("p는:", p)
 

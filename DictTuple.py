@@ -6,6 +6,9 @@ class DictTuple:
         self.dt = [dictionaries for dictionaries in kwargs]
         print("받은값: ", self.dt)
 
+        if self.dt == None:
+            print("여기")
+
         if type(self.dt[0]) == dict:
             if len(self.dt[0]) == 0:
                 raise AssertionError("Dictionary is empty")
@@ -186,9 +189,12 @@ coordinate = mynamedtuple('coordinate', 'x y')
 # print("repr(d):, ", repr(d))
 # Contains
 #print("contains: ", d4.__contains__('c2'))
-# GetItems
+#GetItems
 #print("getitems: ", d4.__getitem__('c1'))
 #print("getitems 이후: ", d4)
+# newGet
+#p4 = DictTuple({'a': 1, 'b': 2, 'c': 3}, {'c': 13, 'd': 14, 'e': 15}, {'e': 25, 'f': 26, 'g': 27})
+#print("getItems: ", p4.__getitem__('e'))
 
 # DelItems
 #print("delitems :", d.__delitem__('c1'), "그 후 d:", d)
@@ -211,9 +217,12 @@ coordinate = mynamedtuple('coordinate', 'x y')
 #print("adt + adict는 : ", adict + adt)
 
 # new EQ
-#p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
+p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
 #p1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
-#p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
+p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
+print("더하기", p+p2)
+p3 = DictTuple()
+print("없다면:", p3)
 #print("eq: False", p1 == p2)
 #print("eq: True", p == p1)
 
