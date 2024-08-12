@@ -6,8 +6,13 @@ class DictTuple:
         self.dt = [dictionaries for dictionaries in kwargs]
         print("받은값: ", self.dt)
 
+        print(type(self.dt))
+
+        if len(self.dt) == 0:
+            raise AssertionError("Dictionary is empty")
+        print(len(self.dt))
         for i in range(len(self.dt)):
-            if len(self.dt[i]) == 0:
+            if len(self.dt[0]) == 0:
                 raise AssertionError("Dictionary is empty")
         else:
             raise AssertionError(f"DictTuple.__init__:{self.dt[0]} is not a dictionary")
