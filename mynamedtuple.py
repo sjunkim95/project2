@@ -130,7 +130,7 @@ class {type_name}:
         
     def __setattr__(self, name, value):
         if self._mutable is False:
-            raise AttributeError("mutable is False, you cannot change the instance")
+            return
         
         for field_name in self._fields:
             if field_name in self.__dict__:
