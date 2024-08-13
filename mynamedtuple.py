@@ -129,8 +129,8 @@ class {type_name}:
         return {type_name}(*iterable)
         
     def __setattr__(self, name, value):
-        if self._mutable:
-            self.__dict__[name] = value
+        
+        self.__dict__[name] = value
         
         
       
