@@ -1,7 +1,7 @@
 import keyword
 
 
-def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
+def mynamedtuple(type_name, field_names, mutable=True, defaults={}):
 
     if type(field_names) == list:
         copy_field_names = []
