@@ -132,6 +132,9 @@ class {type_name}:
         
         self.__dict__[name] = value
         
+        if not self._mutable:
+            raise AttributeError("Attribute cannot be set")
+        
         
       
 '''
