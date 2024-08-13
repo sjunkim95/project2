@@ -232,8 +232,11 @@ class DictTuple:
                 dictionaries[index] = value
                 break
 
+    def __setattr__(self, name, value):
+        self.__dict__[name] = value
 
-coordinate = mynamedtuple('coordinate', 'x y')
+
+#coordinate = mynamedtuple('coordinate', 'x y')
 #d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
