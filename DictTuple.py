@@ -44,8 +44,6 @@ class DictTuple:
 
         if not isinstance(other, DictTuple):
             return False
-        if len(self.dt) != len(other.dt):
-            return False
 
         for left_dict, right_dict in zip(self.dt, other.dt):
             if left_dict != right_dict:
