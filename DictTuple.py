@@ -131,15 +131,15 @@ class DictTuple:
     def __add__(self, right):
         print("add 안에 들어옴")
 
+        print("self", self.dt)
+        print("라이트는", right)
         if type(right) is DictTuple:
             self.dt.extend(right.dt)
 
             return DictTuple(*self.dt)
 
         elif type(right) is dict:
-            print("라이트는", right)
             self.dt.extend(right)
-            print("self", self.dt)
             return DictTuple(self.dt)
         else:
             raise TypeError("The key is not DictTuple or Dict")
@@ -263,9 +263,9 @@ coordinate = mynamedtuple('coordinate', 'x y')
 
 
 # 3.
-#adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-#adict = {'c3': coordinate(3, 4)}
-#print("adt + adict는 : ", adict + adt)
+adt = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'}, {'a': 1, 'b': 2}, {'b': 12, 'c': 13}, {'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
+adict = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'}, {'a': 1, 'b': 2}, {'b': 12, 'c': 13})
+print("adt + adict는 : ", adict + adt)
 
 
 # new EQ
