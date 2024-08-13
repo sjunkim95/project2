@@ -129,19 +129,28 @@ class DictTuple:
     def __add__(self, right):
         print("add 안에 들어옴")
         print("self.dt는: ", self.dt, type(self.dt))
-        print("right은: ", type(right))
-
+        print("right은: ", right, type(right))
+        result_list = []
         if type(right) is DictTuple:
             if self.dt is tuple:
                 self.dt = list(self.dt)
             self.dt.extend(right.dt)
-            return DictTuple(*self.dt)
+            for dictionary in self.dt:
+
+                if dictionary not in result_list:
+                    result_list.append(dictionary)
+                    print(result_list)
+            return DictTuple(*result_list)
 
         elif type(right) is dict:
             if self.dt is tuple:
                 self.dt = list(self.dt)
             self.dt.extend(right)
-            return DictTuple(self.dt)
+
+            for dictionary in self.dt:
+                if dictionary not in result_list:
+                    result_list.append(dictionary)
+            return DictTuple(*result_list)
 
         else:
             raise TypeError("The key is not DictTuple or Dict")
@@ -149,21 +158,32 @@ class DictTuple:
     def __radd__(self, left):
         print("__radd__ 들어옴")
 
+        result_list = []
+
         if type(left) is dict:
             self.dt.insert(0, left)
             print("여기는", self.dt)
-            return DictTuple(*self.dt)
+            for dictionary in self.dt:
+                if dictionary not in result_list:
+                    result_list.append(dictionary)
+            return DictTuple(*result_list)
 
         elif type(left) is DictTuple:
             self.dt.insert(0, left)
-            return DictTuple(*self.dt)
+            for dictionary in self.dt:
+                if dictionary not in result_list:
+                    result_list.append(dictionary)
+            return DictTuple(*result_list)
 
         elif type(left) is tuple:
             left = list(left)
             self.dt = list(self.dt)
             for i in range(len(left), 0, -1):
                 self.dt.insert(0, left[i-1])
-            return DictTuple(*self.dt)
+            for dictionary in self.dt:
+                if dictionary not in result_list:
+                    result_list.append(dictionary)
+            return DictTuple(*result_list)
 
         else:
             raise TypeError("The key is not DictTuple or Dict")
@@ -273,10 +293,10 @@ class DictTuple:
 
 
 # new EQ
-#p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
-#p1 = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
+p = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'}, {'a': 1, 'b': 2}, {'b': 12, 'c': 13}, {'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
+p1 = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'}, {'a': 1, 'b': 2}, {'b': 12, 'c': 13})
 #p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
-#print("더하기", p+p1)
+print("더하기", p+p1)
 
 #print("eq: False", p1.__eq__(p2))
 #print("eq: True", p.__eq__(p1))
