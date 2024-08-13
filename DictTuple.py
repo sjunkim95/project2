@@ -128,7 +128,13 @@ class DictTuple:
             self.dt.append(right)
             return tuple(self.dt)'''
         if type(right) is DictTuple:
-            return f'{DictTuple.__name__}{tuple(self.dt+right.dt)}'
+            return f'{DictTuple.__name__}{tuple(self.dt + right.dt)}'
+        elif type(right) is dict:
+            print("라이트는", right)
+            self.dt.append(right)
+            print("self", self.dt)
+
+            return f'{DictTuple.__name__}{tuple(self.dt)}'
         else:
             raise TypeError("The key is not DictTuple or Dict")
 
@@ -138,7 +144,10 @@ class DictTuple:
         print("여기", self.dt, left)
         if type(left) is dict:
             self.dt.insert(0, left)
-            return left.dt + self.dt
+            return f'{DictTuple.__name__}{tuple(self.dt)}'
+        elif type(left) is DictTuple:
+            self.dt.insert(0, left)
+            return f'{DictTuple.__name__}{tuple(self.dt)}'
         else:
             raise TypeError("The key is not DictTuple or Dict")
 
@@ -245,7 +254,7 @@ class DictTuple:
 # 2.
 #adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #adict = {'c3': coordinate(3, 4)}
-#print("adict + adt: ", adt + adict)
+#print("adict + adt: ", adict + adt)
 
 # 3.
 #adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
