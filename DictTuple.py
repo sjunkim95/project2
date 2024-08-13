@@ -41,30 +41,15 @@ class DictTuple:
 
     def __eq__(self, other):
         print("eq 안에 들어옴")
-        length = len(self.dt)
+
         if not isinstance(other, DictTuple):
             return False
         if len(self.dt) != len(other.dt):
             return False
 
-        print("두개 비교:", self.dt, other.dt)
-        for i in range(length):
-            left_dict = self.dt[i]
-            right_dict = other.dt[i]
-            print("left_dict", left_dict)
-            print("right_dict", right_dict)
-
-            for left_key in left_dict:
-                print("left_key", left_key)
-                if left_dict[left_key] != right_dict[left_key]:
-                    print("여기, ",left_dict[left_key], right_dict[left_key])
-                    return False
-
-            for right_key in right_dict:
-                if right_dict[right_key] != left_dict[right_key]:
-                    print("여기2", right_dict[right_key], left_dict[right_key])
-                    return False
-
+        for left_dict, right_dict in zip(self.dt, other.dt):
+            if left_dict != right_dict:
+                return False
 
         return True
 
@@ -147,7 +132,7 @@ class DictTuple:
         if type(right) is DictTuple:
             return tuple(self.dt + right.dt)
         else:
-            return TypeError("The key is not DictTuple or Dict")
+            raise TypeError("The key is not DictTuple or Dict")
 
 
     def __radd__(self, left):
@@ -277,8 +262,8 @@ coordinate = mynamedtuple('coordinate', 'x y')
 
 #print("eq: False", p1.__eq__(p2))
 #print("eq: True", p.__eq__(p1))
-#print("eq?? :", p['a'] == p1['a'])
-#print("eq?? :", p1['b'] == p2['b'])
+#print("add: ", p2+p1)
+
 
 
 
