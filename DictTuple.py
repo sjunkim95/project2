@@ -134,7 +134,7 @@ class DictTuple:
             self.dt.append(right)
             print("self", self.dt)
 
-            return f'{DictTuple.__name__}{tuple(self.dt)}'
+            return eval(f'{DictTuple.__name__}{tuple(self.dt)}')
         else:
             raise TypeError("The key is not DictTuple or Dict")
 
