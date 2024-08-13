@@ -138,7 +138,7 @@ class DictTuple:
         print("여기", self.dt, left)
         if type(left) is dict:
             self.dt.insert(0, left)
-            return tuple(self.dt)
+            return tuple(self.dt + left.dt)
         else:
             raise TypeError("The key is not DictTuple or Dict")
 
