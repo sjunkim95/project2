@@ -42,6 +42,9 @@ class DictTuple:
     def __eq__(self, other):
         print("eq 안에 들어옴")
 
+        if not isinstance(other, DictTuple):
+            return False
+
         for left_dict, right_dict in zip(self.dt, other.dt):
             if left_dict != right_dict:
                 return False
