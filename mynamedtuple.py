@@ -129,16 +129,10 @@ class {type_name}:
         return {type_name}(*iterable)
         
     def __setattr__(self, name, value):
-        if self._mutable is False:
-            return
-        
-        for field_name in self._fields:
-            if field_name in self.__dict__:
-                print("여기는", field_name, "여기 값은", self.__dict__[field_name])
-                print("음",self._fields)
-                self.__dict__[name] = value
-                    
-        self.__dict__[name] = value
+        if self._mutable:
+            self.__dict__[name] = value
+        else:
+            raise AttributeError("mutable False")
         
         
       
@@ -155,7 +149,7 @@ class {type_name}:
 
     return namespace[type_name]
 
-coordinate = mynamedtuple('coordinate', ['x', 'y'], mutable=True)
+coordinate = mynamedtuple('coordinate', ['x', 'y'])
 print("coordinate리턴은: ", coordinate)
 p = coordinate(0, 0)
 print("setattr:", p.__setattr__('x', 1))
