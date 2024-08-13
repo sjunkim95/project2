@@ -132,19 +132,20 @@ class DictTuple:
         print("right은: ", right, type(right))
         result_list = []
         if type(right) is DictTuple:
-            if self.dt is tuple:
-                self.dt = list(self.dt)
+            self.dt = list(self.dt)
             self.dt.extend(right.dt)
-            for dictionary in self.dt:
 
+            print("응", self.dt)
+            for dictionary in self.dt:
                 if dictionary not in result_list:
                     result_list.append(dictionary)
                     print(result_list)
             return DictTuple(*result_list)
 
         elif type(right) is dict:
-            if self.dt is tuple:
-                self.dt = list(self.dt)
+
+            self.dt = list(self.dt)
+            right = list(right)
             self.dt.extend(right)
 
             for dictionary in self.dt:
@@ -161,6 +162,8 @@ class DictTuple:
         result_list = []
 
         if type(left) is dict:
+            left = list(left)
+            self.dt = list(self.dt)
             self.dt.insert(0, left)
             print("여기는", self.dt)
             for dictionary in self.dt:
@@ -169,7 +172,8 @@ class DictTuple:
             return DictTuple(*result_list)
 
         elif type(left) is DictTuple:
-            self.dt.insert(0, left)
+            self.dt = list(self.dt)
+            self.dt.insert(0, left.dt)
             for dictionary in self.dt:
                 if dictionary not in result_list:
                     result_list.append(dictionary)
@@ -293,8 +297,8 @@ class DictTuple:
 
 
 # new EQ
-#p = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'}, {'a': 1, 'b': 2}, {'b': 12, 'c': 13}, {'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
-#p1 = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'}, {'a': 1, 'b': 2}, {'b': 12, 'c': 13})
+#p = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
+#p1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13}, {'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
 #p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
 #print("더하기", p+p1)
 
