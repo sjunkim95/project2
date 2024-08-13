@@ -163,7 +163,7 @@ class {type_name}:
 #p = coordinate(0, 0)
 #print("p는:", p)
 
-coordinate = mynamedtuple('coordinate', ['x', 'y'], mutable=True)
+#coordinate = mynamedtuple('coordinate', ['x', 'y'], mutable=True)
 #print("coordinate리턴은: ", coordinate)
 #p = coordinate(0, 0)
 #print("p는:", p)
