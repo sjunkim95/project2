@@ -42,9 +42,6 @@ class DictTuple:
     def __eq__(self, other):
         print("eq 안에 들어옴")
 
-        if not isinstance(other, DictTuple):
-            return False
-
         for left_dict, right_dict in zip(self.dt, other.dt):
             if left_dict != right_dict:
                 return False
@@ -191,11 +188,12 @@ class DictTuple:
 
 
 
-coordinate = mynamedtuple('coordinate', 'x y')
+#coordinate = mynamedtuple('coordinate', 'x y')
 #d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 #d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
+
 
 # set items
 #print("set items 없을때: ")

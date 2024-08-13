@@ -1,7 +1,7 @@
 import keyword
 
 
-def mynamedtuple(type_name, field_names, mutable=True, defaults={}):
+def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
 
     if type(field_names) == list:
         copy_field_names = []
@@ -128,12 +128,6 @@ class {type_name}:
     def _make(iterable):
         return {type_name}(*iterable)
     
-    
-    def __setattr__(self, name, value):
-        if self._mutable is False:
-            raise AttributeError("mutable is False, you cannot change the instance")
-        
-        self.__dict__[name] = value
       
 '''
 
@@ -166,8 +160,8 @@ class {type_name}:
 #coordinate = mynamedtuple('coordinate', ['x', 'y'], mutable=True)
 #print("coordinate리턴은: ", coordinate)
 #p = coordinate(0, 0)
-#print("p는:", p)
 #print("setattr:", p.__setattr__('x', 1))
+#print("p는:", p)
 
 #print("replace: ", p._replace(y=5))
 #print("get함수:", p.get_x())
