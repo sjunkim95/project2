@@ -101,7 +101,7 @@ class {type_name}:
             return None
         else:
             return eval(f'{type_name}('+','.join(f"{{k}}={{v}}" for k, v in temp.items())+')')
-        
+        z
     def __getitem__(self, index):
         if index >= len(self._fields):
             raise IndexError("Index out of range")

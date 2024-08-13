@@ -128,8 +128,7 @@ class DictTuple:
 
     def __add__(self, right):
         print("add 안에 들어옴")
-        print("self.dt는: ", self.dt, type(self.dt))
-        print("right은: ", right, type(right))
+
         result_list = []
         if type(right) is DictTuple:
             self.dt = list(self.dt)
