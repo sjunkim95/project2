@@ -233,7 +233,7 @@ class DictTuple:
                 break
 
 
-#coordinate = mynamedtuple('coordinate', 'x y')
+coordinate = mynamedtuple('coordinate', 'x y')
 #d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
