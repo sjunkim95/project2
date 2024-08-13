@@ -56,10 +56,9 @@ class DictTuple:
             for right_key, right_value in right_dict.items():
                 right_keys[right_key] = right_value
 
-        print(left_keys, right_keys)
-
         if left_keys != right_keys:
             return False
+
         return True
 
 
@@ -91,7 +90,6 @@ class DictTuple:
             for dictionaries in reversed(self.dt):
                 return_list = []
                 for key, value in dictionaries.items():
-                   # print("밸류는", key, value)
                     if k == key:
                         if type(value) is int:
                             return value
@@ -100,11 +98,11 @@ class DictTuple:
                                 return_list.append(i)
 
                         return tuple(return_list)
-
         else:
             raise TypeError("the key is not in string")
 
     def __delitem__(self, k):
+
         if type(self.dt) == tuple:
             self.dt = list(self.dt)
         dict_keys = []
@@ -130,6 +128,8 @@ class DictTuple:
 
     def __add__(self, right):
         print("add 안에 들어옴")
+        print("self.dt는: ", self.dt, type(self.dt))
+        print("right은: ", type(right))
 
         if type(right) is DictTuple:
             if self.dt is tuple:
@@ -147,35 +147,24 @@ class DictTuple:
             raise TypeError("The key is not DictTuple or Dict")
 
     def __radd__(self, left):
-
         print("__radd__ 들어옴")
-        print("Self", self, type(self))
-        print("left", left, type(left))
 
         if type(left) is dict:
             self.dt.insert(0, left)
             print("여기는", self.dt)
             return DictTuple(*self.dt)
+
         elif type(left) is DictTuple:
             self.dt.insert(0, left)
             return DictTuple(*self.dt)
+
         elif type(left) is tuple:
             left = list(left)
-            print("여기", left, type(left))
-           # if self.dt is tuple:
-            #    self.dt = list(self.dt)
             self.dt = list(self.dt)
-
-            print("더하기전 left", left, type(left))
-            print("self는", self.dt, type(self.dt))
-
-            print("left는", left)
             for i in range(len(left), 0, -1):
                 self.dt.insert(0, left[i-1])
-
-            print('더한 후 self.dt', self.dt)
-
             return DictTuple(*self.dt)
+
         else:
             raise TypeError("The key is not DictTuple or Dict")
 
@@ -207,8 +196,6 @@ class DictTuple:
 
     def __setitem__(self, index, value):
         print("set items 들어옴")
-        print("요소들: ", index, value)
-        print("self.dt는:", self.dt)
         key_lists = []
         for dictionaries in self.dt:
             for key in dictionaries.keys():
@@ -218,13 +205,9 @@ class DictTuple:
             self.dt.append({index:value})
 
         for dictionaries in reversed(self.dt):
-            print("일단", dictionaries)
             if index in dictionaries.keys():
-                print("여기는")
                 dictionaries[index] = value
                 break
-
-        print("더한 이후 self.dt", self.dt)
 
 
 #coordinate = mynamedtuple('coordinate', 'x y')
@@ -233,7 +216,7 @@ class DictTuple:
 #d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 #d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 
-#print("더하기", d1+d2)
+#print("더하기", d2+d1)
 
 # set items
 #print("set items 없을때: ")
@@ -290,8 +273,8 @@ class DictTuple:
 
 
 # new EQ
-p = ({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
-p1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13}, {'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
+p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
+p1 = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
 #p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
 print("더하기", p+p1)
 
