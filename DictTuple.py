@@ -9,11 +9,11 @@ class DictTuple:
         if len(self.dt) == 0:
             raise AssertionError("Dictionary is empty")
 
-      #  if type(self.dt[0]) == dict:
-      #      if len(self.dt[0]) == 0:
-      #          raise AssertionError("Dictionary is empty")
-      #  else:
-      #     raise AssertionError(f"DictTuple.__init__:{self.dt[0]} is not a dictionary")
+        if type(self.dt[0]) == dict:
+            if len(self.dt[0]) == 0:
+                raise AssertionError("Dictionary is empty")
+        else:
+           raise AssertionError(f"DictTuple.__init__:{self.dt[0]} is not a dictionary")
 
         for i in range(len(self.dt)):
             if len(self.dt[i]) == 0:
@@ -150,10 +150,11 @@ class DictTuple:
         print("여기", self.dt, left)
         if type(left) is dict:
             self.dt.insert(0, left)
-            return f'{DictTuple.__name__}{tuple(self.dt)}'
+            print("여기는", self.dt)
+            return DictTuple(*self.dt)
         elif type(left) is DictTuple:
             self.dt.insert(0, left)
-            return f'{DictTuple.__name__}{tuple(self.dt)}'
+            return DictTuple(*self.dt)
         else:
             raise TypeError("The key is not DictTuple or Dict")
 
@@ -206,12 +207,12 @@ class DictTuple:
 
 
 coordinate = mynamedtuple('coordinate', 'x y')
-d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
+#d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
+#d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
+#d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 #d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 
-print("더하기", d1+d2)
+#print("더하기", d1+d2)
 
 # set items
 #print("set items 없을때: ")
@@ -259,8 +260,7 @@ print("더하기", d1+d2)
 
 # 2.
 #adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-#adict = {'c3': coordinate(3, 4)}
-#print("adict + adt: ", adict + adt)
+
 
 # 3.
 #adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
