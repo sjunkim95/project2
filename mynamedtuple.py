@@ -130,10 +130,10 @@ class {type_name}:
         
     def __setattr__(self, name, value):
         
-        self.__dict__[name] = value
-        
         if not self._mutable:
             raise AttributeError("Attribute cannot be set")
+            
+        self.__dict__[name] = value
         
         
       
