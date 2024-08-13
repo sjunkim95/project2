@@ -42,14 +42,28 @@ class DictTuple:
     def __eq__(self, other):
         print("eq 안에 들어옴")
 
+        left_keys = {}
+        right_keys = {}
+
         if not isinstance(other, DictTuple):
             return False
 
-        for left_dict, right_dict in zip(self.dt, other.dt):
-            if left_dict != right_dict:
-                return False
+        for left_dict in self.dt:
+            for left_key, left_value in left_dict.items():
+                left_keys[left_key] = left_value
 
+        for right_dict in other.dt:
+            for right_key, right_value in right_dict.items():
+                right_keys[right_key] = right_value
+
+        print(left_keys, right_keys)
+
+        if left_keys != right_keys:
+            return False
         return True
+
+
+
 
     def __contains__(self, args):
         key_list = []
