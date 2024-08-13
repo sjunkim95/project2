@@ -128,6 +128,11 @@ class {type_name}:
     def _make(iterable):
         return {type_name}(*iterable)
         
+    def __setattr__(self, name, value):
+        if self_mutable:
+            self.__dict__[name] = value
+        
+        
       
 '''
 
