@@ -131,9 +131,6 @@ class DictTuple:
     def __add__(self, right):
         print("add 안에 들어옴")
 
-        print("self", self.dt)
-        print("라이트는", right)
-
         if type(right) is DictTuple:
             if self.dt is tuple:
                 self.dt = list(self.dt)
@@ -152,31 +149,34 @@ class DictTuple:
     def __radd__(self, left):
 
         print("__radd__ 들어옴")
-        print("Self", self)
-        print("left", left)
+        print("Self", self, type(self))
+        print("left", left, type(left))
 
-        if self is DictTuple:
-            if type(left) is dict:
-                self.dt.insert(0, left)
-                print("여기는", self.dt)
-                return DictTuple(*self.dt)
-            elif type(left) is DictTuple:
-                self.dt.insert(0, left)
-                return DictTuple(*self.dt)
-            else:
-                raise TypeError("The key is not DictTuple or Dict")
-        elif self is tuple:
-            self = list(self)
-            print("여기", self)
-            if type(left) is dict:
-                self.dt.insert(0, left)
-                print("여기는", self.dt)
-                return DictTuple(*self.dt)
-            elif type(left) is DictTuple:
-                self.dt.insert(0, left)
-                return DictTuple(*self.dt)
-            else:
-                raise TypeError("The key is not DictTuple or Dict")
+        if type(left) is dict:
+            self.dt.insert(0, left)
+            print("여기는", self.dt)
+            return DictTuple(*self.dt)
+        elif type(left) is DictTuple:
+            self.dt.insert(0, left)
+            return DictTuple(*self.dt)
+        elif type(left) is tuple:
+            left = list(left)
+            print("여기", left, type(left))
+           # if self.dt is tuple:
+            #    self.dt = list(self.dt)
+            self.dt = list(self.dt)
+
+            print("더하기전 left", left, type(left))
+            print("self는", self.dt, type(self.dt))
+
+            print("left는", left)
+            for i in range(len(self.dt), 0, -1):
+                left.insert(0, self.dt[i-1])
+            print('더한 후 elft', left)
+
+            return DictTuple(*left)
+        else:
+            raise TypeError("The key is not DictTuple or Dict")
 
     def __call__(self, argument):
         print("__call__ 들어옴")
@@ -226,7 +226,7 @@ class DictTuple:
         print("더한 이후 self.dt", self.dt)
 
 
-coordinate = mynamedtuple('coordinate', 'x y')
+#coordinate = mynamedtuple('coordinate', 'x y')
 #d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
@@ -283,9 +283,9 @@ coordinate = mynamedtuple('coordinate', 'x y')
 
 
 # 3.
-#adt = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'}, {'a': 1, 'b': 2}, {'b': 12, 'c': 13}, {'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
+#adt = {'a': 1, 'b': 2}, {'b': 12, 'c': 13}
 #adict = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'}, {'a': 1, 'b': 2}, {'b': 12, 'c': 13})
-#print("adt + adict는 : ", adict + adt)
+#print("adt + adict는 : ", adt + adict)
 
 
 # new EQ
