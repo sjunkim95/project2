@@ -170,11 +170,12 @@ class DictTuple:
             print("self는", self.dt, type(self.dt))
 
             print("left는", left)
-            for i in range(len(self.dt), 0, -1):
-                left.insert(0, self.dt[i-1])
-            print('더한 후 elft', left)
+            for i in range(len(left), 0, -1):
+                self.dt.insert(0, left[i-1])
 
-            return DictTuple(*left)
+            print('더한 후 self.dt', self.dt)
+
+            return DictTuple(*self.dt)
         else:
             raise TypeError("The key is not DictTuple or Dict")
 
