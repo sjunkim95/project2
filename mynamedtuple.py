@@ -127,7 +127,20 @@ class {type_name}:
         
     def _make(iterable):
         return {type_name}(*iterable)
-    
+        
+    def __setattr__(self, name, value):
+        if self._mutable is False:
+            raise AttributeError("mutable is False, you cannot change the instance")
+        
+        for field_name in self._fields:
+            if field_name in self.__dict__:
+                print("여기는", field_name, "여기 값은", self.__dict__[field_name])
+                print("음",self._fields)
+                if name == field_name:
+                    
+        self.__dict__[name] = value
+        
+        
       
 '''
 

@@ -137,7 +137,6 @@ class DictTuple:
         if type(right) is DictTuple:
             if self.dt is tuple:
                 self.dt = list(self.dt)
-
             self.dt.extend(right.dt)
             return DictTuple(*self.dt)
 
@@ -146,22 +145,38 @@ class DictTuple:
                 self.dt = list(self.dt)
             self.dt.extend(right)
             return DictTuple(self.dt)
+
         else:
             raise TypeError("The key is not DictTuple or Dict")
 
     def __radd__(self, left):
-        print(type(left))
+
         print("__radd__ 들어옴")
-        print("여기", self.dt, left)
-        if type(left) is dict:
-            self.dt.insert(0, left)
-            print("여기는", self.dt)
-            return DictTuple(*self.dt)
-        elif type(left) is DictTuple:
-            self.dt.insert(0, left)
-            return DictTuple(*self.dt)
-        else:
-            raise TypeError("The key is not DictTuple or Dict")
+        print("Self", self)
+        print("left", left)
+
+        if self is DictTuple:
+            if type(left) is dict:
+                self.dt.insert(0, left)
+                print("여기는", self.dt)
+                return DictTuple(*self.dt)
+            elif type(left) is DictTuple:
+                self.dt.insert(0, left)
+                return DictTuple(*self.dt)
+            else:
+                raise TypeError("The key is not DictTuple or Dict")
+        elif self is tuple:
+            self = list(self)
+            print("여기", self)
+            if type(left) is dict:
+                self.dt.insert(0, left)
+                print("여기는", self.dt)
+                return DictTuple(*self.dt)
+            elif type(left) is DictTuple:
+                self.dt.insert(0, left)
+                return DictTuple(*self.dt)
+            else:
+                raise TypeError("The key is not DictTuple or Dict")
 
     def __call__(self, argument):
         print("__call__ 들어옴")
@@ -268,16 +283,16 @@ coordinate = mynamedtuple('coordinate', 'x y')
 
 
 # 3.
-adt = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'}, {'a': 1, 'b': 2}, {'b': 12, 'c': 13}, {'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
-adict = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'}, {'a': 1, 'b': 2}, {'b': 12, 'c': 13})
-print("adt + adict는 : ", adict + adt)
+#adt = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'}, {'a': 1, 'b': 2}, {'b': 12, 'c': 13}, {'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
+#adict = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'}, {'a': 1, 'b': 2}, {'b': 12, 'c': 13})
+#print("adt + adict는 : ", adict + adt)
 
 
 # new EQ
-#p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
-#p1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
+p = ({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
+p1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13}, {'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
 #p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
-#print("더하기", p+p2)
+print("더하기", p+p1)
 
 #print("eq: False", p1.__eq__(p2))
 #print("eq: True", p.__eq__(p1))
