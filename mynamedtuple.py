@@ -127,11 +127,13 @@ class {type_name}:
         
     def _make(iterable):
         return {type_name}(*iterable)
-        
-    def __setattr__(self, name, value):
-        if self._mutable == False:
-            raise AttributeError
     
+    
+    def __setattr__(self, name, value):
+        if self._mutable is False:
+            raise AttributeError("mutable is False, you cannot change the instance")
+        
+        self.__dict__[name] = value
       
 '''
 
@@ -161,10 +163,12 @@ class {type_name}:
 #p = coordinate(0, 0)
 #print("p는:", p)
 
-coordinate = mynamedtuple('coordinate', ['x', 'y'])
+coordinate = mynamedtuple('coordinate', ['x', 'y'], mutable=True)
 #print("coordinate리턴은: ", coordinate)
 #p = coordinate(0, 0)
 #print("p는:", p)
+#print("setattr:", p.__setattr__('x', 1))
+
 #print("replace: ", p._replace(y=5))
 #print("get함수:", p.get_x())
 #print("p[0]:", p[1])
