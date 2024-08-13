@@ -273,10 +273,10 @@ class DictTuple:
 
 
 # new EQ
-p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
-p1 = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
+#p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
+#p1 = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
 #p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
-print("더하기", p+p1)
+#print("더하기", p+p1)
 
 #print("eq: False", p1.__eq__(p2))
 #print("eq: True", p.__eq__(p1))
