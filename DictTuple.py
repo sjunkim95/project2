@@ -128,7 +128,7 @@ class DictTuple:
             self.dt.append(right)
             return tuple(self.dt)'''
         if type(right) is DictTuple:
-            return tuple(self.dt + right.dt)
+            return f'{DictTuple.__name__}{tuple(self.dt+right.dt)}'
         else:
             raise TypeError("The key is not DictTuple or Dict")
 
@@ -138,7 +138,7 @@ class DictTuple:
         print("여기", self.dt, left)
         if type(left) is dict:
             self.dt.insert(0, left)
-            return tuple(left.dt + self.dt)
+            return left.dt + self.dt
         else:
             raise TypeError("The key is not DictTuple or Dict")
 
@@ -190,13 +190,13 @@ class DictTuple:
         print("더한 이후 self.dt", self.dt)
 
 
-
 #coordinate = mynamedtuple('coordinate', 'x y')
 #d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 #d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 
+#rint("더하기", d1+d2)
 
 # set items
 #print("set items 없을때: ")
