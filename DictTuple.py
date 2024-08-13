@@ -133,12 +133,17 @@ class DictTuple:
 
         print("self", self.dt)
         print("라이트는", right)
-        if type(right) is DictTuple:
-            self.dt.extend(right.dt)
 
+        if type(right) is DictTuple:
+            if self.dt is tuple:
+                self.dt = list(self.dt)
+
+            self.dt.extend(right.dt)
             return DictTuple(*self.dt)
 
         elif type(right) is dict:
+            if self.dt is tuple:
+                self.dt = list(self.dt)
             self.dt.extend(right)
             return DictTuple(self.dt)
         else:
