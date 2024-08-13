@@ -1,7 +1,7 @@
 import keyword
 
 
-def mynamedtuple(type_name, field_names, mutable=True, defaults={}):
+def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
 
     if type(field_names) == list:
         copy_field_names = []
@@ -136,7 +136,7 @@ class {type_name}:
             if field_name in self.__dict__:
                 print("여기는", field_name, "여기 값은", self.__dict__[field_name])
                 print("음",self._fields)
-                if name == field_name:
+                self.__dict__[name] = value
                     
         self.__dict__[name] = value
         
@@ -155,6 +155,11 @@ class {type_name}:
 
     return namespace[type_name]
 
+coordinate = mynamedtuple('coordinate', ['x', 'y'], mutable=True)
+print("coordinate리턴은: ", coordinate)
+p = coordinate(0, 0)
+print("setattr:", p.__setattr__('x', 1))
+print("p는:", p)
 
 #Triple1 = mynamedtuple("Triple1", ['a', 'b', 'c'])
 #Triple2 = mynamedtuple("Triple3", ['a', 'b', 'c'])
