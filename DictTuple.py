@@ -132,7 +132,6 @@ class DictTuple:
         else:
             raise TypeError("The key is not DictTuple or Dict")
 
-
     def __radd__(self, left):
         print(type(left))
         print("__radd__ 들어옴")

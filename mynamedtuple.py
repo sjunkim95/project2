@@ -126,7 +126,12 @@ class {type_name}:
         return dictionary
         
     def _make(iterable):
-        return {type_name}(*iterable)          
+        return {type_name}(*iterable)
+        
+    def __setattr__(self, name, value):
+        if self._mutable == False:
+            raise AttributeError
+    
       
 '''
 
