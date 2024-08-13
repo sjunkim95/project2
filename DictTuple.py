@@ -9,11 +9,11 @@ class DictTuple:
         if len(self.dt) == 0:
             raise AssertionError("Dictionary is empty")
 
-        if type(self.dt[0]) == dict:
-            if len(self.dt[0]) == 0:
-                raise AssertionError("Dictionary is empty")
-        else:
-            raise AssertionError(f"DictTuple.__init__:{self.dt[0]} is not a dictionary")
+      #  if type(self.dt[0]) == dict:
+      #      if len(self.dt[0]) == 0:
+      #          raise AssertionError("Dictionary is empty")
+      #  else:
+      #     raise AssertionError(f"DictTuple.__init__:{self.dt[0]} is not a dictionary")
 
         for i in range(len(self.dt)):
             if len(self.dt[i]) == 0:
@@ -130,25 +130,17 @@ class DictTuple:
 
     def __add__(self, right):
         print("add 안에 들어옴")
-        '''print("add")
-        if type(right) is dict:
-            print("뭐냐:", right)
-            self.right = right
-            print("self.right:", type(self.right))
-            new_dict = DictTuple(right)
-            print("new Dict는:", new_dict)
-            print("new_dict", type(new_dict))
-            print("더하면", self.dt + new_dict)
-            self.dt.append(right)
-            return tuple(self.dt)'''
+
         if type(right) is DictTuple:
-            return f'{DictTuple.__name__}{tuple(self.dt + right.dt)}'
+            self.dt.extend(right.dt)
+
+            return DictTuple(*self.dt)
+
         elif type(right) is dict:
             print("라이트는", right)
-            self.dt.append(right)
+            self.dt.extend(right)
             print("self", self.dt)
-
-            return eval(f'{DictTuple.__name__}{tuple(self.dt)}')
+            return DictTuple(self.dt)
         else:
             raise TypeError("The key is not DictTuple or Dict")
 
@@ -213,13 +205,13 @@ class DictTuple:
         print("더한 이후 self.dt", self.dt)
 
 
-#coordinate = mynamedtuple('coordinate', 'x y')
-#d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-#d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-#d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
+coordinate = mynamedtuple('coordinate', 'x y')
+d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
+d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
+d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 #d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
 
-#rint("더하기", d1+d2)
+print("더하기", d1+d2)
 
 # set items
 #print("set items 없을때: ")
@@ -274,6 +266,7 @@ class DictTuple:
 #adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
 #adict = {'c3': coordinate(3, 4)}
 #print("adt + adict는 : ", adict + adt)
+
 
 # new EQ
 #p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
