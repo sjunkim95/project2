@@ -131,6 +131,8 @@ class {type_name}:
     def __setattr__(self, name, value):
         if self._mutable:
             self.__dict__[name] = value
+        elif name in self.__dict__:
+            self.__dict__[name] = value
         else:
             raise AttributeError("Attribute cannot be set")
 
