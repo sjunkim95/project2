@@ -28,11 +28,17 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
                 copy_field_names.append(i)
             field_names = copy_field_names
 
+        temp_list = []
+        for names in field_names:
+            if names not in temp_list:
+                temp_list.append(names)
+            field_names = temp_list
+
     for i in defaults.keys():
         if i not in field_names:
             raise SyntaxError(f"Invalid field name value: {i}")
 
-   # print("타입네임", type_name, "필드네임", field_names, "defaults는:", defaults)
+ #   print("타입네임", type_name, "필드네임", field_names, "defaults는:", defaults)
 
     if type(type_name) == int:
         raise SyntaxError(f"int should not be the type_name")
@@ -138,16 +144,15 @@ class {type_name}:
         '''
 
     namespace = {}
-    print(code)
     exec(code, namespace)
 
     return namespace[type_name]
 
 
-coordinate = mynamedtuple('coordinate', 'x x y')
-print("coordinate리턴은: ", coordinate)
-p = coordinate(0, 0)
-print(p)
+#coordinate = mynamedtuple('coordinate', 'x, y, x, z')
+#print("coordinate리턴은: ", coordinate)
+#p = coordinate(0, 0, 1)
+#print(p)
 #print("setattr:", p.__setattr__('x', 1))
 #print("p는:", p)
 
