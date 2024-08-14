@@ -131,7 +131,7 @@ class {type_name}:
     def __setattr__(self, name, value):
         if {type_name}._mutable:
             self.__dict__[name] = value
-        elif name in self.__dict__:
+        elif name not in self.__dict__ and name in {type_name}._fields:
             self.__dict__[name] = value
         else:
             raise AttributeError("Attribute cannot be set")
@@ -151,9 +151,9 @@ class {type_name}:
 
     return namespace[type_name]
 
-#coordinate = mynamedtuple('coordinate', ['x', 'y'])
-#print("coordinate리턴은: ", coordinate)
-#p = coordinate(0, 0)
+coordinate = mynamedtuple('coordinate', ['x', 'y'])
+print("coordinate리턴은: ", coordinate)
+p = coordinate(0, 0)
 #print("setattr:", p.__setattr__('x', 1))
 #print("p는:", p)
 
