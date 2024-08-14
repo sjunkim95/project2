@@ -51,26 +51,19 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
     else:
         raise SyntaxError(f"Invalid field names: {field_names}")
 
+    my_init = ""
+    init_keyword = ','.join(field_names)
+    for i in field_names:
+        my_init += f"self.{i} = {i}\n"
+
     code = f'''
 class {type_name}:
 
     _mutable = {mutable}  
     _fields = {field_names}
                     
-    def __init__(self, *args, **kwargs):
-        
-        self.args = args
-        self.kwargs = kwargs  
-        
-        if len(self.kwargs) == 0:
-            for i in range(len(self._fields)):
-                field_name = self._fields[i]
-                self.__dict__[field_name]= self.args[i]
-
-        if len(self.args) == 0:
-            for i in range(len(self._fields)):
-                field_name = self._fields[i]
-                self.__dict__[field_name]= self.kwargs[field_name]
+    def __init__(self, {init_keyword}): 
+        {my_init}
                 
     def __repr__(self):
         return '{type_name}('+','.join(f"{{self._fields[i]}}={{self.__dict__[self._fields[i]]}}" for i in range(len(self._fields)))+')'
@@ -101,7 +94,7 @@ class {type_name}:
             return None
         else:
             return eval(f'{type_name}('+','.join(f"{{k}}={{v}}" for k, v in temp.items())+')')
-        z
+            
     def __getitem__(self, index):
         if index >= len(self._fields):
             raise IndexError("Index out of range")
@@ -131,12 +124,10 @@ class {type_name}:
     def __setattr__(self, name, value):
         if {type_name}._mutable:
             self.__dict__[name] = value
-        elif name not in self.__dict__ and name in {type_name}._fields:
+        elif not {type_name}._mutable and name not in self.__dict__ and name in {type_name}._fields:
             self.__dict__[name] = value
         else:
             raise AttributeError("Attribute cannot be set")
-
-        
       
 '''
 
@@ -155,8 +146,7 @@ class {type_name}:
 if __name__ == '__main__':
     coordinate = mynamedtuple('coordinate', ['x', 'y'])
     print("coordinate리턴은: ", coordinate)
-    p = coordinate(0, 0)
-    """
+   # p = coordinate(0, 0)
     #print("setattr:", p.__setattr__('x', 1))
     #print("p는:", p)
 
@@ -196,4 +186,3 @@ if __name__ == '__main__':
     #origin = coordinate(0,0)
     #new_origin = origin._replace(y=5)
     #print(origin, new_origin)
-    """
