@@ -153,9 +153,10 @@ class {type_name}:
 
 
 if __name__ == '__main__':
-   # coordinate = mynamedtuple('coordinate', ['x', 'y'])
-    #print("coordinate리턴은: ", coordinate)
-   # p = coordinate(0, 0)
+    coordinate = mynamedtuple('coordinate', ['x', 'y'])
+    print("coordinate리턴은: ", coordinate)
+    p = coordinate(0, 0)
+    """
     #print("setattr:", p.__setattr__('x', 1))
     #print("p는:", p)
 
@@ -195,3 +196,4 @@ if __name__ == '__main__':
     #origin = coordinate(0,0)
     #new_origin = origin._replace(y=5)
     #print(origin, new_origin)
+    """

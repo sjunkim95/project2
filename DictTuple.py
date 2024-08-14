@@ -233,10 +233,11 @@ class DictTuple:
                 break
 
     def __setattr__(self, name, value):
-        if name == "dt":
-            self.__dict__[name] = value
-        else:
+        if name != "dt":
             raise AttributeError("The variable name is wrong, should be dt")
+
+        self.__dict__[name] = value
+
 
 
 #coordinate = mynamedtuple('coordinate', 'x y')
