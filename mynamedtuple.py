@@ -54,7 +54,7 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
     my_init = ""
     init_keyword = ','.join(field_names)
     for i in field_names:
-        my_init += f"self.{i} = {i}\n"
+        my_init += f"self.{i} = {i}\n        "
 
     code = f'''
 class {type_name}:
@@ -138,14 +138,16 @@ class {type_name}:
         '''
 
     namespace = {}
+  #  print(code)
     exec(code, namespace)
 
     return namespace[type_name]
 
 
-#coordinate = mynamedtuple('coordinate', ['x', 'y'])
+#coordinate = mynamedtuple('coordinate', ['x', 'x', 'y'])
 #print("coordinate리턴은: ", coordinate)
-# p = coordinate(0, 0)
+#p = coordinate(0, 0)
+#print(p)
 #print("setattr:", p.__setattr__('x', 1))
 #print("p는:", p)
 
