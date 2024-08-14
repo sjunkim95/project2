@@ -12,6 +12,7 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
         field_names = sorted(list(set(field_names)))
 
     if type(field_names) == str:
+
         if ',' in field_names:
             field_names = field_names.split(',')
             copy_field_names = []
@@ -19,7 +20,6 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
                 i = i.strip()
                 copy_field_names.append(i)
             field_names = copy_field_names
-
         else:
             field_names = field_names.split(' ')
             copy_field_names = []
@@ -38,14 +38,13 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults={}):
         if i not in field_names:
             raise SyntaxError(f"Invalid field name value: {i}")
 
- #   print("타입네임", type_name, "필드네임", field_names, "defaults는:", defaults)
-
     if type(type_name) == int:
         raise SyntaxError(f"int should not be the type_name")
     if not type_name.isidentifier():
         raise SyntaxError(f"Invalid type name: {type_name}")
     if keyword.iskeyword(type_name):
         raise SyntaxError(f"Invalid keyword name: {type_name}")
+
     if type(field_names) == list or type(field_names) == str:
         if type(field_names) == str:
             if keyword.iskeyword(field_names):
@@ -75,7 +74,6 @@ class {type_name}:
         return '{type_name}('+','.join(f"{{self._fields[i]}}={{self.__dict__[self._fields[i]]}}" for i in range(len(self._fields)))+')'
     
     def __eq__(self, other):
-        print("EQ myname 들어옴")
         if not isinstance(other, {type_name}):
             return False
         for i in range(len(self._fields)):
@@ -108,12 +106,6 @@ class {type_name}:
             return self.__dict__[self._fields[index]]
         else:
             raise TypeError("the index is not int")
-   
-    def __contains__(self, item):
-        for v in self.return_dict.values():
-            if v == item:
-                return True
-        return False
     
     def _asdict(self):
         store = ','.join(f"{{self._fields[i]}}:{{self.__dict__[self._fields[i]]}}" for i in range(len(self._fields)))
@@ -147,47 +139,3 @@ class {type_name}:
     exec(code, namespace)
 
     return namespace[type_name]
-
-
-#coordinate = mynamedtuple('coordinate', 'x, y, x, z')
-#print("coordinate리턴은: ", coordinate)
-#p = coordinate(0, 0, 1)
-#print(p)
-#print("setattr:", p.__setattr__('x', 1))
-#print("p는:", p)
-
-#Triple1 = mynamedtuple("Triple1", ['a', 'b', 'c'])
-#Triple2 = mynamedtuple("Triple3", ['a', 'b', 'c'])
-#print(Triple1.a)
-#print(Triple1.__eq__(Triple1, Triple2))
-
-#coordinate = mynamedtuple('coordinate', ['x', 'y'])
-# #Triple1 = mynamedtuple("Triple1", ['a', 'b', 'c'])
-# #t1 = Triple1(a=2, b=2, c=2)
-#print(t1)
-#print("replace: ,", t1._replace(a=2, b=2, c=0))
-#p = coordinate(0, 0)
-#print("p는:", p)
-
-#coordinate = mynamedtuple('coordinate', ['x', 'y'], mutable=True)
-#print("coordinate리턴은: ", coordinate)
-#p = coordinate(0, 0)
-#print("setattr:", p.__setattr__('x', 1))
-#print("p는:", p)
-
-#print("replace: ", p._replace(y=5))
-#print("get함수:", p.get_x())
-#print("p[0]:", p[1])
-#print("asdict:", p._asdict())
-#print("_make: ", coordinate._make((0,1)))
-#origin = coordinate(0, 0)
-#dif = repr(origin)
-#yes = eval(dif)
-#print("yes", yes.x)
-#print("repr(origin)", repr(origin))
-#print("여기", yes == origin)
-#print("되나", origin.get_x())
-
-#origin = coordinate(0,0)
-#new_origin = origin._replace(y=5)
-#print(origin, new_origin)

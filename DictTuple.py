@@ -4,7 +4,6 @@ class DictTuple:
     def __init__(self, *kwargs):
 
         self.dt = [dictionaries for dictionaries in kwargs]
-        print("받은값: ", self.dt)
 
         if len(self.dt) == 0:
             raise AssertionError("Dictionary is empty")
@@ -21,12 +20,12 @@ class DictTuple:
 
 
     def __len__(self):
+
         len_set = set()
         for dictionary in self.dt:
             for key in dictionary:
                 len_set.add(key)
 
-        print(type(len(len_set)))
         return len(len_set)
 
     def __bool__(self):
@@ -40,7 +39,6 @@ class DictTuple:
         return f'DictTuple{self.dt}'
 
     def __eq__(self, other):
-        print("eq 안에 들어옴")
 
         left_keys = {}
         right_keys = {}
@@ -75,14 +73,16 @@ class DictTuple:
             return True
 
     def __getitem__(self, k):
-        print("get item 안에 들어옴")
 
         if type(self.dt) is tuple:
             self.dt = list(self.dt)
+
         dict_keys = []
+
         for dictionary in reversed(self.dt):
             for key in dictionary.keys():
                 dict_keys.append(key)
+
         if k not in dict_keys:
             raise KeyError("The key does not exists")
 
@@ -105,12 +105,16 @@ class DictTuple:
 
         if type(self.dt) == tuple:
             self.dt = list(self.dt)
+
         dict_keys = []
+
         for dictionary in self.dt:
             for key in dictionary.keys():
                 dict_keys.append(key)
+
         if k not in dict_keys:
             raise KeyError("The key does not exists")
+
         if type(k) == str:
             for dictionaries in self.dt:
                 if k in dictionaries.keys():
@@ -120,6 +124,7 @@ class DictTuple:
             raise TypeError("the key is not in string")
 
         length = len(self.dt)
+
         while length > 0:
             count = 0
             if len(self.dt[count]) == 0:
@@ -127,18 +132,16 @@ class DictTuple:
             length -= 1
 
     def __add__(self, right):
-        print("add 안에 들어옴")
 
         result_list = []
         if type(right) is DictTuple:
             self.dt = list(self.dt)
             self.dt.extend(right.dt)
 
-            print("응", self.dt)
             for dictionary in self.dt:
                 if dictionary not in result_list:
                     result_list.append(dictionary)
-                    print(result_list)
+
             return DictTuple(*result_list)
 
         elif type(right) is dict:
@@ -156,7 +159,6 @@ class DictTuple:
             raise TypeError("The key is not DictTuple or Dict")
 
     def __radd__(self, left):
-        print("__radd__ 들어옴")
 
         result_list = []
 
@@ -164,7 +166,6 @@ class DictTuple:
             left = list(left)
             self.dt = list(self.dt)
             self.dt.insert(0, left)
-            print("여기는", self.dt)
             for dictionary in self.dt:
                 if dictionary not in result_list:
                     result_list.append(dictionary)
@@ -192,7 +193,6 @@ class DictTuple:
             raise TypeError("The key is not DictTuple or Dict")
 
     def __call__(self, argument):
-        print("__call__ 들어옴")
         my_list = []
         for dictionaries in self.dt:
             for key, values in dictionaries.items():
@@ -218,7 +218,6 @@ class DictTuple:
         return self
 
     def __setitem__(self, index, value):
-        print("set items 들어옴")
         key_lists = []
         for dictionaries in self.dt:
             for key in dictionaries.keys():
@@ -235,90 +234,5 @@ class DictTuple:
     def __setattr__(self, name, value):
         if name != "dt":
             raise AssertionError("The variable name is wrong, should be dt")
-
         self.__dict__[name] = value
 
-
-
-#coordinate = mynamedtuple('coordinate', 'x y')
-#d = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-#d1 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-#d2 = DictTuple({'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
-#d4 = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)}, {'c2': coordinate(1, 2)}, {'c3': coordinate(3, 4)})
-
-#print("더하기", d2+d1)
-
-# set items
-#print("set items 없을때: ")
-#d4['c4'] = 1
-#p = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
-#print("set items 있을때: ")
-#p['b'] = 13
-#print("iter: ", d4.__iter__())
-#print("d4['c1']", d4['c1'])
-#print("d4 :", d4)
-#print("d4 __call__ :", d4.__call__(argument='c1'))
-
-#test1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13})
-#test2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
-#print("EQ는: ", test1 == test2)
-
-# Eq 함수
-# mynamed도 불려오네
-#print("eq: True?", d == d1)
-#print("eq: False?", d == d2)
-# Len 함수
-#print("d.__len__():", d.__len__())
-# Bool 함수
-#print("d.__bool__():", d.__bool__())
-# Repr 함수
-# print("repr(d):, ", repr(d))
-# Contains
-#print("contains: ", d4.__contains__('c2'))
-#GetItems
-#print("getitems: ", d4.__getitem__('c1'))
-#print("getitems : ", d4['c1'])
-# newGet
-#p4 = DictTuple({'a': 1, 'b': 2, 'c': 3}, {'c': 13, 'd': 14, 'e': 15}, {'e': 25, 'f': 26, 'g': 27})
-#print("getItems: ", p4.__getitem__('e'))
-
-# DelItems
-#print("delitems :", d.__delitem__('c1'), "그 후 d:", d)
-#print("delitems전 : ", d4)
-#print("delitems : ", d4.__delitem__('c1'), "그 후 d4: ", d4)
-#print("d.__getattr__(): ", d.__getattr__('c1'))
-
-# __add__
-# 1.
-#print("d1+d2 는: ", d2+d1)
-
-# 2.
-#adt = DictTuple({'c1': coordinate(1, 2)}, {'c1': coordinate(3, 4)})
-
-
-# 3.
-#adt = {'a': 1, 'b': 2}, {'b': 12, 'c': 13}
-#adict = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'}, {'a': 1, 'b': 2}, {'b': 12, 'c': 13})
-#print("adt + adict는 : ", adt + adict)
-
-
-# new EQ
-#p = DictTuple({'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
-#p1 = DictTuple({'a': 1, 'b': 2}, {'b': 12, 'c': 13}, {'a': 'one', 'b': 'two'}, {'b': 'twelve', 'c': 'thirteen'})
-#p2 = DictTuple({'a': 1, 'b': 12}, {'c': 13})
-#print("더하기", p+p1)
-
-#print("eq: False", p1.__eq__(p2))
-#print("eq: True", p.__eq__(p1))
-#print("add: ", p2+p1)
-
-
-
-
-#p3 = DictTuple({'a': 1, 'b': 2, 'c': 3}, {'c': 13, 'd': 14, 'e': 15}, {'e': 25, 'f': 26, 'g': 27})
-#print("ITER 보자:", p3.__iter__())
-#print("ITER 이어서:", iter(p3))
-
-#for i in p3:
- #   print(str(i) + ', ', end = '')
-  #  print('finished')
