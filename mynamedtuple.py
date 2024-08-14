@@ -129,7 +129,8 @@ class {type_name}:
         return {type_name}(*iterable)
         
     def __setattr__(self, name, value):
-        
+        if not self._mutable:
+            raise AttributeError("Attribute cannot be set")
         self.__dict__[name] = value
 
         
