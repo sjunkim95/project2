@@ -138,16 +138,16 @@ class {type_name}:
         '''
 
     namespace = {}
-  #  print(code)
+    print(code)
     exec(code, namespace)
 
     return namespace[type_name]
 
 
-#coordinate = mynamedtuple('coordinate', ['x', 'x', 'y'])
-#print("coordinate리턴은: ", coordinate)
-#p = coordinate(0, 0)
-#print(p)
+coordinate = mynamedtuple('coordinate', 'x x y')
+print("coordinate리턴은: ", coordinate)
+p = coordinate(0, 0)
+print(p)
 #print("setattr:", p.__setattr__('x', 1))
 #print("p는:", p)
 

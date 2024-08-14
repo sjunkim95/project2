@@ -234,7 +234,7 @@ class DictTuple:
 
     def __setattr__(self, name, value):
         if name != "dt":
-            raise AttributeError("The variable name is wrong, should be dt")
+            raise AssertionError("The variable name is wrong, should be dt")
 
         self.__dict__[name] = value
 
